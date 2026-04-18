@@ -11,14 +11,17 @@ on:
 jobs:
   build:
     name: Build ${{ matrix.config.target }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
       matrix:
         config:
-          - target: win
-          - target: android64
-          - target: android32
+          - target: Win64
+            os: windows-latest
+          - target: Android64
+            os: ubuntu-latest
+          - target: Android32
+            os: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -30,38 +33,35 @@ jobs:
           target: ${{ matrix.config.target }}
           build-config: RelWithDebInfo
           export-pdb: true
+          combine: true
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.config.target }}-build
-          path: |
-            build/*.geode
-            build/*.pdb
+          path: build/*.geode
           if-no-files-found: ignore
 
   package:
     name: Package combined .geode
     runs-on: ubuntu-latest
     needs: build
-    if: success()
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download all artifacts
+      - name: Download all build artifacts
         uses: actions/download-artifact@v4
         with:
           path: artifacts/
 
-      - name: Find and display .geode files
-        run: |
-          find artifacts/ -name "*.geode" | while read f; do
-            echo "Found: $f"
-          done
+      - name: Merge .geode files
+        uses: geode-sdk/build-geode-mod/merge@main
+        with:
+          path: artifacts/
 
-      - name: Upload combined artifact
+      - name: Upload final .geode
         uses: actions/upload-artifact@v4
         with:
-          name: Xd-rework-all-platforms
-          path: artifacts/**/*.geode
+          name: Xd-rework
+          path: "*.geode"
           if-no-files-found: warn
