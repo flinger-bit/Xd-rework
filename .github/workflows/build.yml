@@ -13,19 +13,13 @@ on:
 jobs:
   build:
     name: Build ${{ matrix.config.target }}
-    runs-on: ${{ matrix.config.os }}
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         config:
-          - target: Win64
-            os: windows-latest
-          - target: macOS
-            os: macos-13
           - target: Android64
-            os: ubuntu-latest
           - target: Android32
-            os: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +30,6 @@ jobs:
           sdk: v5.6.1
           target: ${{ matrix.config.target }}
           build-config: RelWithDebInfo
-          export-pdb: true
           combine: true
 
       - name: Upload artifact
