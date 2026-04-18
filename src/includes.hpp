@@ -2,6 +2,7 @@
 
 #include <Geode/Geode.hpp>
 #include <Geode/ui/Popup.hpp>
+#include <Geode/ui/GeodeUI.hpp>
 #include <Geode/ui/TextInput.hpp>
 
 #include <string>

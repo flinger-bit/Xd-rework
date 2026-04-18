@@ -72,7 +72,7 @@ public:
 
 protected:
 
-        bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) override;
+        bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {});
 
         ~RecordLayer() override {
                 cocos2d::CCTouchDispatcher::get()->unregisterForcePrio(this);
@@ -98,7 +98,7 @@ public:
         }
 
         void moreSettings(CCObject*) {
-                geode::openSettingsPopup(mod, false);
+                geode::openSettingsPopup(mod);
         }
 
         void updateDots();

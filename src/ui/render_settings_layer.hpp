@@ -24,7 +24,7 @@ public:
 
 private:
 
-        bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) override;
+        bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {});
 
 public:
 

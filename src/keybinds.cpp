@@ -51,7 +51,7 @@ class $modify(CCKeyboardDispatcher) {
     //   log::debug("{}", str);
     // }
 
-    return CCKeyboardDispatcher::dispatchKeyboardMSG(key, isKeyDown, isKeyRepeat);
+    return CCKeyboardDispatcher::dispatchKeyboardMSG(key, isKeyDown, isKeyRepeat, false);
   }
 };
 
@@ -150,7 +150,7 @@ $execute{
         "open_menu"_spr,
         "Open Menu",
         "Open Menu.",
-        { Keybind::create(KEY_F, Modifier::Alt) },
+        { keybinds::Keybind::create(KEY_F, Modifier::Alt) },
         "xdBot",
         false
     });
@@ -159,7 +159,7 @@ $execute{
         "toggle_recording"_spr,
         "Record macro",
         "Toggles recording.",
-        { Keybind::create(KEY_G, Modifier::Alt) },
+        { keybinds::Keybind::create(KEY_G, Modifier::Alt) },
         "xdBot",
         false
     });
@@ -168,7 +168,7 @@ $execute{
       "toggle_playing"_spr,
       "Play macro",
       "Toggles playing.",
-      { Keybind::create(KEY_H, Modifier::Alt) },
+      { keybinds::Keybind::create(KEY_H, Modifier::Alt) },
       "xdBot",
         false
     });
@@ -177,7 +177,7 @@ $execute{
       "toggle_speedhack"_spr,
       "Speedhack",
       "Toggles speedhack.",
-      { Keybind::create(KEY_S, Modifier::Alt) },
+      { keybinds::Keybind::create(KEY_S, Modifier::Alt) },
       "xdBot",
         false
     });
@@ -186,7 +186,7 @@ $execute{
       "toggle_noclip"_spr,
       "NoClip",
       "Toggles NoClip.",
-      { Keybind::create(KEY_N, Modifier::Alt) },
+      { keybinds::Keybind::create(KEY_N, Modifier::Alt) },
       "xdBot",
         false
     });
@@ -195,7 +195,7 @@ $execute{
       "toggle_frame_stepper"_spr,
       "Toggle Frame Stepper",
       "Toggles frame stepper..",
-      { Keybind::create(KEY_C, Modifier::Alt) },
+      { keybinds::Keybind::create(KEY_C, Modifier::Alt) },
       "xdBot",
       false
     });
@@ -204,7 +204,7 @@ $execute{
       "step_frame"_spr,
       "Advance frame",
       "Advances one frame if frame stepper is on.",
-      { Keybind::create(KEY_V) },
+      { keybinds::Keybind::create(KEY_V) },
       "xdBot"
     });
 
@@ -214,7 +214,7 @@ $execute{
       "show_trajectory"_spr,
       "Show Trajectory",
       "Toggles Show Trajectory.",
-      { Keybind::create(KEY_T, Modifier::Alt) },
+      { keybinds::Keybind::create(KEY_T, Modifier::Alt) },
       "xdBot"
     });
 
@@ -222,7 +222,7 @@ $execute{
       "toggle_render"_spr,
       "Render",
       "Toggles rendering.",
-      { Keybind::create(KEY_P, Modifier::Alt) },
+      { keybinds::Keybind::create(KEY_P, Modifier::Alt) },
       "xdBot",
       false
     });

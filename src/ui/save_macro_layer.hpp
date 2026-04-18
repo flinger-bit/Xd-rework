@@ -9,7 +9,7 @@ class SaveMacroLayer : public geode::Popup, public TextInputDelegate {
     TextInput* descInput   = nullptr;
     TextInput* pathInput   = nullptr;
 
-    bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) override {
+    bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) {
         if (!Popup::init(w, h, bg, bgRect)) return false;
         setTitle("Save Macro");
 
