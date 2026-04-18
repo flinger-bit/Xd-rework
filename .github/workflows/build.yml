@@ -1,0 +1,44 @@
+name: Build Geode Mod
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build on ${{ matrix.config.os }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - os: windows-latest
+            extra-flags: ""
+          - os: ubuntu-latest
+            extra-flags: ""
+          - os: macos-latest
+            extra-flags: ""
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the mod
+        uses: geode-sdk/build-geode-mod@main
+        with:
+          sdk: v5.6.1
+          extra-flags: ${{ matrix.config.extra-flags }}
+          build-config: RelWithDebInfo
+          export-pdb: true
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.config.os }}-build
+          path: |
+            build/*.geode
+            build/*.pdb
+          if-no-files-found: ignore
