@@ -18,8 +18,8 @@ public:
     template<typename T>
     static void setBackgroundColor(T* bg) {
         if (!bg) return;
-        cocos2d::ccColor3B color = Mod::get()->getSettingValue<cocos2d::ccColor3B>("background_color");
-        if (color == ccc3(51, 68, 153)) color = ccc3(255, 255, 255);
+        cocos2d::ccColor3B color = geode::Mod::get()->getSettingValue<cocos2d::ccColor3B>("background_color");
+        if (color == cocos2d::ccc3(51, 68, 153)) color = cocos2d::ccc3(255, 255, 255);
         bg->setColor(color);
     }
 
