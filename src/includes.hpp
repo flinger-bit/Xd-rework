@@ -1,6 +1,8 @@
 #pragma once
 
 #include <Geode/Geode.hpp>
+#include <Geode/ui/GeodeUI.hpp>
+#include <Geode/ui/TextInput.hpp>
 
 #include <string>
 #include <thread>
