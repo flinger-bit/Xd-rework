@@ -139,7 +139,7 @@ public:
     void handleAudioRecording(PlayLayer* /*pl*/, int /*frame*/) {}
     static bool toggle() { return false; }
     static bool shouldUseAPI() { return false; }
-    bool tryPause() { return false; }
+    bool tryPause() { return true; }
 };
 
 #endif
