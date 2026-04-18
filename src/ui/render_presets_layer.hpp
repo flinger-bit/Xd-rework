@@ -21,7 +21,7 @@ static const std::vector<RenderPreset> renderPresets = {
 
 class RenderPresetsLayer : public geode::Popup {
 
-    bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) override {
+    bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) {
         if (!Popup::init(w, h, bg, bgRect)) return false;
         setTitle("Render Presets");
 

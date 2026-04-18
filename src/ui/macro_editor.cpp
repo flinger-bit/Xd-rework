@@ -890,7 +890,7 @@ void MacroEditLayer::onSave(CCObject*) {
             CCArray* children = CCDirector::sharedDirector()->getRunningScene()->getChildren();
             for (auto child : CCArrayExt<CCObject*>(children)) {
                 if (RecordLayer* layer = typeinfo_cast<RecordLayer*>(child)) {
-                    layer->keyBackClicked();
+                    layer->onClose(nullptr);
                     break;
                 }
             }

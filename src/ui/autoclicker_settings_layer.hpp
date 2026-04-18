@@ -9,7 +9,7 @@ class AutoclickerLayer : public geode::Popup, public TextInputDelegate {
     TextInput* holdInput2  = nullptr;
     TextInput* releaseInput2 = nullptr;
 
-    bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) override {
+    bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) {
         if (!Popup::init(w, h, bg, bgRect)) return false;
         setTitle("Autoclicker Settings");
 

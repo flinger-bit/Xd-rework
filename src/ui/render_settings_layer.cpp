@@ -115,7 +115,7 @@ bool RenderSettingsLayer::init(float w, float h, const char* bg, cocos2d::CCRect
     bgSpr->setContentSize({ 392, 55 });
     menu->addChild(bgSpr);
 
-    if (usingApi) bg->setOpacity(40);
+    if (usingApi) bgSpr->setOpacity(40);
 
     CCLabelBMFont* lbl = CCLabelBMFont::create("Extra Args:", "bigFont.fnt");
     lbl->setPosition(ccp(-105, 88));
@@ -129,7 +129,6 @@ bool RenderSettingsLayer::init(float w, float h, const char* bg, cocos2d::CCRect
     argsInput = CCTextInputNode::create(150, 30, "args", "chatFont.fnt");
     argsInput->m_textField->setAnchorPoint({ 0.5f, 0.5f });
     argsInput->ignoreAnchorPointForPosition(true);
-    argsInput->m_placeholderLabel->setAnchorPoint({ 0.5f, 0.5f });
     argsInput->setPosition(ccp(25, 86));
     argsInput->setLabelPlaceholderColor(ccc3(163, 135, 121));
     argsInput->setMouseEnabled(true);
@@ -151,7 +150,7 @@ bool RenderSettingsLayer::init(float w, float h, const char* bg, cocos2d::CCRect
     bgSpr->setContentSize({ 401, 55 });
     menu->addChild(bgSpr);
     
-    if (usingApi) bg->setOpacity(40);
+    if (usingApi) bgSpr->setOpacity(40);
 
     lbl = CCLabelBMFont::create("Audio Args:", "bigFont.fnt");
     lbl->setPosition(ccp(-105, 55));
@@ -165,7 +164,6 @@ bool RenderSettingsLayer::init(float w, float h, const char* bg, cocos2d::CCRect
     audioArgsInput = CCTextInputNode::create(150, 30, "audio args", "chatFont.fnt");
     audioArgsInput->m_textField->setAnchorPoint({ 0.5f, 0.5f });
     audioArgsInput->ignoreAnchorPointForPosition(true);
-    audioArgsInput->m_placeholderLabel->setAnchorPoint({ 0.5f, 0.5f });
     audioArgsInput->setPosition(ccp(18, 53));
     audioArgsInput->setLabelPlaceholderColor(ccc3(163, 135, 121));
     audioArgsInput->setMouseEnabled(true);
@@ -199,7 +197,6 @@ bool RenderSettingsLayer::init(float w, float h, const char* bg, cocos2d::CCRect
     videoArgsInput = CCTextInputNode::create(150, 30, "video args", "chatFont.fnt");
     videoArgsInput->m_textField->setAnchorPoint({ 0.5f, 0.5f });
     videoArgsInput->ignoreAnchorPointForPosition(true);
-    videoArgsInput->m_placeholderLabel->setAnchorPoint({ 0.5f, 0.5f });
     videoArgsInput->setPosition({19, 22});
     videoArgsInput->setLabelPlaceholderColor(ccc3(163, 135, 121));
     videoArgsInput->setMouseEnabled(true);
@@ -229,7 +226,6 @@ bool RenderSettingsLayer::init(float w, float h, const char* bg, cocos2d::CCRect
     secondsInput = CCTextInputNode::create(150, 30, "sec", "chatFont.fnt");
     secondsInput->m_textField->setAnchorPoint({ 0.5f, 0.5f });
     secondsInput->ignoreAnchorPointForPosition(true);
-    secondsInput->m_placeholderLabel->setAnchorPoint({ 0.5f, 0.5f });
     secondsInput->setPosition(ccp(50, -8));
     secondsInput->setLabelPlaceholderColor(ccc3(163, 135, 121));
     secondsInput->setMouseEnabled(true);
@@ -467,22 +463,19 @@ bool RenderSettingsLayer::init(float w, float h, const char* bg, cocos2d::CCRect
     menu->addChild(btn);
 
     if (usingApi) {
-        argsInput->m_placeholderLabel->setOpacity(100);
-        audioArgsInput->m_placeholderLabel->setOpacity(100);
+        argsInput->setOpacity(100);
+        audioArgsInput->setOpacity(100);
 
         argsInput->setID("disabled-input"_spr);
         audioArgsInput->setID("disabled-input"_spr);
 
         extensionInput->setEnabled(false);
-        extensionInput->getInputNode()->m_placeholderLabel->setOpacity(100);
         extensionInput->getBGSprite()->setOpacity(40);
 
         fadeOutInput->setEnabled(false);
-        fadeOutInput->getInputNode()->m_placeholderLabel->setOpacity(100);
         fadeOutInput->getBGSprite()->setOpacity(40);
 
         fadeInInput->setEnabled(false);
-        fadeInInput->getInputNode()->m_placeholderLabel->setOpacity(100);
         fadeInInput->getBGSprite()->setOpacity(40);
 
         onlySongToggle->setCascadeOpacityEnabled(true);
