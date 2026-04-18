@@ -3,16 +3,17 @@
 #include "../includes.hpp"
 #include "../hacks/show_trajectory.hpp"
 
-class TrajectorySettingsLayer : public geode::Popup<>, public TextInputDelegate {
+class TrajectorySettingsLayer : public geode::Popup, public TextInputDelegate {
 
     TextInput* lengthInput = nullptr;
 
-    bool setup() override {
+    bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) override {
+        if (!Popup::init(w, h, bg, bgRect)) return false;
         setTitle("Trajectory Settings");
 
         auto& g = Global::get();
-        float w = m_mainLayer->getContentSize().width;
-        float h = m_mainLayer->getContentSize().height;
+        float mw = m_mainLayer->getContentSize().width;
+        float mh = m_mainLayer->getContentSize().height;
 
         auto menu = CCMenu::create();
         menu->setPosition(ccp(0, 0));
@@ -26,22 +27,21 @@ class TrajectorySettingsLayer : public geode::Popup<>, public TextInputDelegate 
             m_mainLayer->addChild(lbl);
         };
 
-        addLabel("Length (frames):", w / 2 - 110, h - 50);
+        addLabel("Length (frames):", mw / 2 - 110, mh - 50);
 
         lengthInput = TextInput::create(70, "240");
-        lengthInput->setPosition(w / 2 + 50, h - 50);
+        lengthInput->setPosition(mw / 2 + 50, mh - 50);
         lengthInput->setFilter("0123456789");
-        auto lenVal = geode::utils::numFromString<int>(g.mod->getSavedValue<std::string>("trajectory_length"));
         lengthInput->setString(g.mod->getSavedValue<std::string>("trajectory_length"));
         lengthInput->setDelegate(this);
         lengthInput->setID("trajectory_length");
         m_mainLayer->addChild(lengthInput);
 
-        addLabel("Both sides:", w / 2 - 110, h - 75);
+        addLabel("Both sides:", mw / 2 - 110, mh - 75);
         auto on  = CCSprite::createWithSpriteFrameName("GJ_checkOn_001.png");
         auto off = CCSprite::createWithSpriteFrameName("GJ_checkOff_001.png");
         auto toggle = CCMenuItemToggler::create(off, on, this, menu_selector(TrajectorySettingsLayer::onBothSides));
-        toggle->setPosition(w / 2 + 50, h - 75);
+        toggle->setPosition(mw / 2 + 50, mh - 75);
         toggle->setScale(0.55f);
         toggle->toggle(g.trajectoryBothSides);
         menu->addChild(toggle);

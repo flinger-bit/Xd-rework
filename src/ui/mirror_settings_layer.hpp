@@ -2,13 +2,14 @@
 
 #include "../includes.hpp"
 
-class MirrorSettingsLayer : public geode::Popup<> {
+class MirrorSettingsLayer : public geode::Popup {
 
-    bool setup() override {
+    bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) override {
+        if (!Popup::init(w, h, bg, bgRect)) return false;
         setTitle("Mirror Settings");
 
-        float w = m_mainLayer->getContentSize().width;
-        float h = m_mainLayer->getContentSize().height;
+        float mw = m_mainLayer->getContentSize().width;
+        float mh = m_mainLayer->getContentSize().height;
 
         auto menu = CCMenu::create();
         menu->setPosition(ccp(0, 0));
@@ -17,13 +18,13 @@ class MirrorSettingsLayer : public geode::Popup<> {
         lbl->setAnchorPoint({0.f, 0.5f});
         lbl->setScale(0.35f);
         lbl->setOpacity(200);
-        lbl->setPosition(w / 2 - 100, h / 2);
+        lbl->setPosition(mw / 2 - 100, mh / 2);
         m_mainLayer->addChild(lbl);
 
         auto on  = CCSprite::createWithSpriteFrameName("GJ_checkOn_001.png");
         auto off = CCSprite::createWithSpriteFrameName("GJ_checkOff_001.png");
         auto toggle = CCMenuItemToggler::create(off, on, this, menu_selector(MirrorSettingsLayer::onInvert));
-        toggle->setPosition(w / 2 + 70, h / 2);
+        toggle->setPosition(mw / 2 + 70, mh / 2);
         toggle->setScale(0.55f);
         toggle->toggle(Mod::get()->getSavedValue<bool>("p2_input_mirror_inverted"));
         menu->addChild(toggle);

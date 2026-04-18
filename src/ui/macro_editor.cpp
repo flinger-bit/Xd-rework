@@ -113,7 +113,8 @@ void MacroEditLayer::updateHover(cocos2d::CCPoint pos) {
     stopHovering();
 }
 
-bool MacroEditLayer::setup() {
+bool MacroEditLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRect) {
+        if (!Popup::init(w, h, bg, bgRect)) return false;
     Utils::setBackgroundColor(m_bgSprite);
     
     CCMenu* menu = CCMenu::create();
@@ -222,7 +223,7 @@ bool MacroEditLayer::setup() {
     btn->setPosition({128.5, -99});
     menu->addChild(btn);
 
-	spr = CCSprite::createWithSpriteFrameName("GJ_plusBtn_001.png");
+        spr = CCSprite::createWithSpriteFrameName("GJ_plusBtn_001.png");
     spr->setScale(0.45f);
     btn = CCMenuItemSpriteExtra::create(spr, this, menu_selector(MacroEditLayer::onAddInput));
     btn->setPosition({23.5, -94});
@@ -953,15 +954,15 @@ void MacroEditLayer::onClear(CCObject*) {
 }
 
 void MacroEditLayer::onMerge(CCObject*) {
-    geode::Popup<>* layer = nullptr;
+    geode::Popup* layer = nullptr;
     if (Global::get().layer)
-        layer = typeinfo_cast<geode::Popup<>*>(Global::get().layer);
+        layer = typeinfo_cast<geode::Popup*>(Global::get().layer);
     else {
         CCArray* children = CCDirector::sharedDirector()->getRunningScene()->getChildren();
         CCObject* child;
         CCARRAY_FOREACH(children, child) {
             if (typeinfo_cast<RecordLayer*>(child)) {
-                layer = typeinfo_cast<geode::Popup<>*>(child);
+                layer = typeinfo_cast<geode::Popup*>(child);
                 break;
             }
         }

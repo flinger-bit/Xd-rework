@@ -2,10 +2,10 @@
 
 #include "../includes.hpp"
 
-class NoclipSettingsLayer : public geode::Popup<> {
+class NoclipSettingsLayer : public geode::Popup {
 
-    bool setup() override {
-        auto winSize = CCDirector::sharedDirector()->getWinSize();
+    bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) override {
+        if (!Popup::init(w, h, bg, bgRect)) return false;
 
         setTitle("Noclip Settings");
 
@@ -30,9 +30,9 @@ class NoclipSettingsLayer : public geode::Popup<> {
             menu->addChild(toggle);
         };
 
-        float h = m_mainLayer->getContentSize().height;
-        addToggle("Player 1 Noclip", "macro_noclip_p1", h / 2 + 15);
-        addToggle("Player 2 Noclip", "macro_noclip_p2", h / 2 - 15);
+        float h2 = m_mainLayer->getContentSize().height;
+        addToggle("Player 1 Noclip", "macro_noclip_p1", h2 / 2 + 15);
+        addToggle("Player 2 Noclip", "macro_noclip_p2", h2 / 2 - 15);
 
         m_mainLayer->addChild(menu);
         return true;

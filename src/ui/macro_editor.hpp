@@ -11,11 +11,11 @@ struct InputText {
     std::string action;
 };
 
-class MacroEditLayer : public geode::Popup<>, public TextInputDelegate {
+class MacroEditLayer : public geode::Popup, public TextInputDelegate {
 
 private:
     
-    bool setup();
+    bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) override;
 
     void onClose(CCObject*) override;
 

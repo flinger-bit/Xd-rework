@@ -3,24 +3,25 @@
 #include "../includes.hpp"
 #include "../macro.hpp"
 
-class SaveMacroLayer : public geode::Popup<>, public TextInputDelegate {
+class SaveMacroLayer : public geode::Popup, public TextInputDelegate {
 
     TextInput* authorInput = nullptr;
-    TextInput* descInput = nullptr;
-    TextInput* pathInput = nullptr;
+    TextInput* descInput   = nullptr;
+    TextInput* pathInput   = nullptr;
 
-    bool setup() override {
+    bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) override {
+        if (!Popup::init(w, h, bg, bgRect)) return false;
         setTitle("Save Macro");
 
-        float w = m_mainLayer->getContentSize().width;
-        float h = m_mainLayer->getContentSize().height;
+        float mw = m_mainLayer->getContentSize().width;
+        float mh = m_mainLayer->getContentSize().height;
 
         auto addLabel = [&](const char* text, float y) {
             auto lbl = CCLabelBMFont::create(text, "bigFont.fnt");
             lbl->setAnchorPoint({0.f, 0.5f});
             lbl->setScale(0.32f);
             lbl->setOpacity(200);
-            lbl->setPosition(w / 2 - 130, y);
+            lbl->setPosition(mw / 2 - 130, y);
             m_mainLayer->addChild(lbl);
         };
 
@@ -28,22 +29,22 @@ class SaveMacroLayer : public geode::Popup<>, public TextInputDelegate {
         std::filesystem::path macrosFolder = g.mod->getSettingValue<std::filesystem::path>("macros_folder");
         std::string defaultPath = (macrosFolder / "macro").string();
 
-        addLabel("Author:", h - 55);
+        addLabel("Author:", mh - 55);
         authorInput = TextInput::create(180, "Author");
-        authorInput->setPosition(w / 2 + 30, h - 55);
+        authorInput->setPosition(mw / 2 + 30, mh - 55);
         authorInput->setString(GJAccountManager::sharedState() ? GJAccountManager::sharedState()->m_username : "");
         authorInput->setDelegate(this);
         m_mainLayer->addChild(authorInput);
 
-        addLabel("Description:", h - 85);
+        addLabel("Description:", mh - 85);
         descInput = TextInput::create(180, "Description");
-        descInput->setPosition(w / 2 + 30, h - 85);
+        descInput->setPosition(mw / 2 + 30, mh - 85);
         descInput->setDelegate(this);
         m_mainLayer->addChild(descInput);
 
-        addLabel("Path:", h - 115);
+        addLabel("Path:", mh - 115);
         pathInput = TextInput::create(180, "Path");
-        pathInput->setPosition(w / 2 + 30, h - 115);
+        pathInput->setPosition(mw / 2 + 30, mh - 115);
         pathInput->setString(defaultPath);
         pathInput->setDelegate(this);
         m_mainLayer->addChild(pathInput);
@@ -54,7 +55,7 @@ class SaveMacroLayer : public geode::Popup<>, public TextInputDelegate {
         auto saveLabel = CCLabelBMFont::create("Save", "goldFont.fnt");
         saveLabel->setScale(0.7f);
         auto saveBtn = CCMenuItemSpriteExtra::create(saveLabel, this, menu_selector(SaveMacroLayer::onSave));
-        saveBtn->setPosition(w / 2, h - 148);
+        saveBtn->setPosition(mw / 2, mh - 148);
         menu->addChild(saveBtn);
 
         m_mainLayer->addChild(menu);
@@ -63,8 +64,8 @@ class SaveMacroLayer : public geode::Popup<>, public TextInputDelegate {
 
     void onSave(CCObject*) {
         std::string author = authorInput ? authorInput->getString() : "";
-        std::string desc = descInput ? descInput->getString() : "";
-        std::string path = pathInput ? pathInput->getString() : "";
+        std::string desc   = descInput   ? descInput->getString()   : "";
+        std::string path   = pathInput   ? pathInput->getString()   : "";
 
         if (path.empty()) {
             FLAlertLayer::create("Error", "Please enter a file path.", "OK")->show();

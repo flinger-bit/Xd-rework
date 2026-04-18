@@ -19,19 +19,20 @@ static const std::vector<RenderPreset> renderPresets = {
     { "4K    60fps", 3840, 2160, 60, 40, "libx264" },
 };
 
-class RenderPresetsLayer : public geode::Popup<> {
+class RenderPresetsLayer : public geode::Popup {
 
-    bool setup() override {
+    bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) override {
+        if (!Popup::init(w, h, bg, bgRect)) return false;
         setTitle("Render Presets");
 
-        float w = m_mainLayer->getContentSize().width;
-        float h = m_mainLayer->getContentSize().height;
+        float mw = m_mainLayer->getContentSize().width;
+        float mh = m_mainLayer->getContentSize().height;
 
         auto menu = CCMenu::create();
         menu->setPosition(ccp(0, 0));
 
-        float startY = h - 52;
-        float rowH = 26;
+        float startY = mh - 52;
+        float rowH   = 26;
 
         for (size_t i = 0; i < renderPresets.size(); i++) {
             const auto& preset = renderPresets[i];
@@ -48,7 +49,7 @@ class RenderPresetsLayer : public geode::Popup<> {
             spr->addChild(lbl);
 
             auto btn = CCMenuItemSpriteExtra::create(spr, this, menu_selector(RenderPresetsLayer::onPreset));
-            btn->setPosition(w / 2, startY - rowH * i);
+            btn->setPosition(mw / 2, startY - rowH * i);
             btn->setTag(static_cast<int>(i));
             menu->addChild(btn);
         }

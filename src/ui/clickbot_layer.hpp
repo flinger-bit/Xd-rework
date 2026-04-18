@@ -6,7 +6,7 @@
 
 const std::unordered_map<int, std::string> buttons = { {1, ""} };
 
-class ClickSettingsLayer : public geode::Popup<std::string, geode::Popup<>*> {
+class ClickSettingsLayer : public geode::Popup {
 
 private:
 
@@ -22,13 +22,13 @@ private:
 
     CCMenuItemToggler* disableToggle = nullptr;
 
-    bool setup(std::string button, geode::Popup<>* layer) override;
+    bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) override;
 
 public:
 
-    geode::Popup<>* clickbotLayer = nullptr;
+    geode::Popup* clickbotLayer = nullptr;
 
-    static ClickSettingsLayer* create(std::string button, geode::Popup<>* layer);
+    static ClickSettingsLayer* create(std::string button, geode::Popup* layer);
 
     void saveSettings() {
         matjson::Value data = matjson::Serialize<ClickSetting>::to_json(settings);
@@ -74,7 +74,7 @@ public:
 };
 
 
-class ClickbotLayer : public geode::Popup<> {
+class ClickbotLayer : public geode::Popup {
 
     Slider* volumeSlider = nullptr;
     Slider* pitchSlider = nullptr;
@@ -84,7 +84,7 @@ class ClickbotLayer : public geode::Popup<> {
 
 private:
 
-    bool setup() override;
+    bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) override;
 
 public:
 
@@ -98,7 +98,7 @@ public:
 
     void openClickSettings(CCObject* obj) {
         std::string id = static_cast<CCMenuItemSpriteExtra*>(obj)->getID();
-        ClickSettingsLayer::create(id, static_cast<geode::Popup<>*>(this))->show();
+        ClickSettingsLayer::create(id, static_cast<geode::Popup*>(this))->show();
     }
 
     void updateLabels();

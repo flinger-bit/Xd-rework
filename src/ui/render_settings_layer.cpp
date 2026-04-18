@@ -38,7 +38,7 @@ void RenderSettingsLayer::textChanged(CCTextInputNode* node) {
 }
 
 void RenderSettingsLayer::onDefaults(CCObject*) {
-	geode::createQuickPopup(
+        geode::createQuickPopup(
         "Restore",
         "<cr>Restore</c> default render settings?",
         "Cancel", "Yes",
@@ -46,7 +46,7 @@ void RenderSettingsLayer::onDefaults(CCObject*) {
             auto& g = Global::get();
             
             g.mod->setSavedValue("render_args", std::string("-pix_fmt yuv420p"));
-	        g.mod->setSavedValue("render_audio_args", std::string(""));
+                g.mod->setSavedValue("render_audio_args", std::string(""));
             #ifdef GEODE_IS_WINDOWS
             g.mod->setSavedValue("render_video_args", std::string("colorspace=all=bt709:iall=bt470bg:fast=1"));
             #else
@@ -64,7 +64,7 @@ void RenderSettingsLayer::onDefaults(CCObject*) {
             g.mod->setSavedValue("render_hide_endscreen", false);
             g.mod->setSavedValue("render_hide_levelcomplete", false);
 
-	        CCArray* children = CCDirector::sharedDirector()->getRunningScene()->getChildren();
+                CCArray* children = CCDirector::sharedDirector()->getRunningScene()->getChildren();
             CCObject* child;
             CCARRAY_FOREACH(children, child) {
                 if (RecordLayer* layer = typeinfo_cast<RecordLayer*>(child)) {
@@ -82,7 +82,8 @@ void RenderSettingsLayer::onDefaults(CCObject*) {
     );
 }
 
-bool RenderSettingsLayer::setup() {
+bool RenderSettingsLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRect) {
+        if (!Popup::init(w, h, bg, bgRect)) return false;
     setTitle("Render Settings");
 
     bool usingApi = Renderer::shouldUseAPI();
@@ -412,15 +413,15 @@ bool RenderSettingsLayer::setup() {
     if (usingApi) lbl->setOpacity(90);
 
     sfxSlider = Slider::create(
-		this,
-		menu_selector(RenderSettingsLayer::onSlider),
-		1.f
-	);
-	sfxSlider->setPosition({188, 24});
-	sfxSlider->setAnchorPoint({ 0.f, 0.f });
-	sfxSlider->setScale(0.545f);
-	sfxSlider->setValue(Mod::get()->getSavedValue<double>("render_sfx_volume"));
-	menu->addChild(sfxSlider);
+                this,
+                menu_selector(RenderSettingsLayer::onSlider),
+                1.f
+        );
+        sfxSlider->setPosition({188, 24});
+        sfxSlider->setAnchorPoint({ 0.f, 0.f });
+        sfxSlider->setScale(0.545f);
+        sfxSlider->setValue(Mod::get()->getSavedValue<double>("render_sfx_volume"));
+        menu->addChild(sfxSlider);
 
     lbl = CCLabelBMFont::create("Music Volume", "goldFont.fnt");
     lbl->setScale(0.475f);
@@ -430,15 +431,15 @@ bool RenderSettingsLayer::setup() {
     if (usingApi) lbl->setOpacity(90);
 
     musicSlider = Slider::create(
-		this,
-		menu_selector(RenderSettingsLayer::onSlider),
-		1.f
-	);
-	musicSlider->setPosition({188, 69});
-	musicSlider->setAnchorPoint({ 0.f, 0.f });
-	musicSlider->setScale(0.545f);
-	musicSlider->setValue(Mod::get()->getSavedValue<double>("render_music_volume"));
-	menu->addChild(musicSlider);
+                this,
+                menu_selector(RenderSettingsLayer::onSlider),
+                1.f
+        );
+        musicSlider->setPosition({188, 69});
+        musicSlider->setAnchorPoint({ 0.f, 0.f });
+        musicSlider->setScale(0.545f);
+        musicSlider->setValue(Mod::get()->getSavedValue<double>("render_music_volume"));
+        menu->addChild(musicSlider);
 
     ButtonSprite* spr = ButtonSprite::create("Ok");
     spr->setScale(0.875);

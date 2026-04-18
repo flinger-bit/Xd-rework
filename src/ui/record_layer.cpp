@@ -14,52 +14,52 @@
 #include <Geode/utils/web.hpp>
 
 const std::vector<std::vector<RecordSetting>> settings {
-	{
-		{ "TPS Bypass:", "macro_tps_enabled", InputType::Tps, 0.4f },
-		{ "Speedhack:", "macro_speedhack_enabled", InputType::Speedhack, 0.4f },
-		{ "Seed:", "macro_seed_enabled", InputType::Seed, 0.4f },
-		{ "Enable Noclip:", "macro_noclip", InputType::Settings, 0.325f, menu_selector(NoclipSettingsLayer::open) },
-		{ "Show Trajectory:", "macro_show_trajectory", InputType::Settings, 0.325f, menu_selector(TrajectorySettingsLayer::open)  },
-		{ "Enable Frame Stepper:", "macro_frame_stepper", InputType::None },
-	},
-	{
-		{ "Instant respawn:", "macro_instant_respawn", InputType::None },
-		{ "No death effect:", "macro_no_death_effect", InputType::None },
-		{ "No respawn flash:", "macro_no_respawn_flash", InputType::None },
-		{ "Enable Coin Finder:", "macro_coin_finder", InputType::None },
-		{ "Enable Layout Mode:", "macro_layout_mode", InputType::None },
-		{ "Auto Safe Mode:", "macro_auto_safe_mode", InputType::None }
-	},
-	{
-	#ifdef GEODE_IS_WINDOWS
-		{ "Force cursor on open:", "menu_show_cursor", InputType::None },
-		{ "Button on pause menu:", "menu_show_button", InputType::None },
-		{ "Pause on open:", "menu_pause_on_open", InputType::None },
-	#else
-		{ "Always show buttons:", "macro_always_show_buttons", InputType::None },
-		{ "Hide speedhack button:", "macro_hide_speedhack", InputType::None },
-		{ "Hide Frame Stepper button:", "macro_hide_stepper", InputType::None, 0.3f },
-	#endif
-		{ "Hide labels on render:", "render_hide_labels", InputType::None },
-		{ "Hide playing label:", "macro_hide_playing_label", InputType::None },
-		{ "Hide recording label:", "macro_hide_recording_label", InputType::None }
-	},
-	{
-		{ "Enable Clickbot:", "clickbot_enabled", InputType::Settings, 0.325f, menu_selector(ClickbotLayer::open)},
-		{ "Enable Autoclicker:", "autoclicker_enabled", InputType::Settings, 0.3f, menu_selector(AutoclickerLayer::open) },
-		{ "Always Practice Fixes:", "macro_always_practice_fixes", InputType::None },
-		{ "Ignore inputs:", "macro_ignore_inputs", InputType::None },
-		{ "Show Frame Label:", "macro_show_frame_label", InputType::None },
-		{ "Speedhack Audio:", "macro_speedhack_audio", InputType::None }
-		// { "Auto Stop Playing:", "macro_auto_stop_playing", InputType::None }
-	},
+        {
+                { "TPS Bypass:", "macro_tps_enabled", InputType::Tps, 0.4f },
+                { "Speedhack:", "macro_speedhack_enabled", InputType::Speedhack, 0.4f },
+                { "Seed:", "macro_seed_enabled", InputType::Seed, 0.4f },
+                { "Enable Noclip:", "macro_noclip", InputType::Settings, 0.325f, menu_selector(NoclipSettingsLayer::open) },
+                { "Show Trajectory:", "macro_show_trajectory", InputType::Settings, 0.325f, menu_selector(TrajectorySettingsLayer::open)  },
+                { "Enable Frame Stepper:", "macro_frame_stepper", InputType::None },
+        },
+        {
+                { "Instant respawn:", "macro_instant_respawn", InputType::None },
+                { "No death effect:", "macro_no_death_effect", InputType::None },
+                { "No respawn flash:", "macro_no_respawn_flash", InputType::None },
+                { "Enable Coin Finder:", "macro_coin_finder", InputType::None },
+                { "Enable Layout Mode:", "macro_layout_mode", InputType::None },
+                { "Auto Safe Mode:", "macro_auto_safe_mode", InputType::None }
+        },
+        {
+        #ifdef GEODE_IS_WINDOWS
+                { "Force cursor on open:", "menu_show_cursor", InputType::None },
+                { "Button on pause menu:", "menu_show_button", InputType::None },
+                { "Pause on open:", "menu_pause_on_open", InputType::None },
+        #else
+                { "Always show buttons:", "macro_always_show_buttons", InputType::None },
+                { "Hide speedhack button:", "macro_hide_speedhack", InputType::None },
+                { "Hide Frame Stepper button:", "macro_hide_stepper", InputType::None, 0.3f },
+        #endif
+                { "Hide labels on render:", "render_hide_labels", InputType::None },
+                { "Hide playing label:", "macro_hide_playing_label", InputType::None },
+                { "Hide recording label:", "macro_hide_recording_label", InputType::None }
+        },
+        {
+                { "Enable Clickbot:", "clickbot_enabled", InputType::Settings, 0.325f, menu_selector(ClickbotLayer::open)},
+                { "Enable Autoclicker:", "autoclicker_enabled", InputType::Settings, 0.3f, menu_selector(AutoclickerLayer::open) },
+                { "Always Practice Fixes:", "macro_always_practice_fixes", InputType::None },
+                { "Ignore inputs:", "macro_ignore_inputs", InputType::None },
+                { "Show Frame Label:", "macro_show_frame_label", InputType::None },
+                { "Speedhack Audio:", "macro_speedhack_audio", InputType::None }
+                // { "Auto Stop Playing:", "macro_auto_stop_playing", InputType::None }
+        },
     {
-		{ "Respawn Time:", "respawn_time_enabled", InputType::Respawn },
-		{ "Input Mirror:", "p2_input_mirror", InputType::Settings, 0.325f, menu_selector(MirrorSettingsLayer::open) },
-		{ "Disable Shaders:", "disable_shaders", InputType::None },
-		{ "Instant Mirror Portal:", "instant_mirror_portal", InputType::None },
-		{ "No Mirror Portal:", "no_mirror_portal", InputType::None },
-		{ "Enable Auto Saving:", "macro_auto_save", InputType::Autosave }
+                { "Respawn Time:", "respawn_time_enabled", InputType::Respawn },
+                { "Input Mirror:", "p2_input_mirror", InputType::Settings, 0.325f, menu_selector(MirrorSettingsLayer::open) },
+                { "Disable Shaders:", "disable_shaders", InputType::None },
+                { "Instant Mirror Portal:", "instant_mirror_portal", InputType::None },
+                { "No Mirror Portal:", "no_mirror_portal", InputType::None },
+                { "Enable Auto Saving:", "macro_auto_save", InputType::Autosave }
     }
 };
 
@@ -129,7 +129,7 @@ void RecordLayer::openSaveMacro(CCObject*) {
 }
 
 void RecordLayer::openLoadMacro(CCObject*) {
-    LoadMacroLayer::open(static_cast<geode::Popup<>*>(this), nullptr);
+    LoadMacroLayer::open(static_cast<geode::Popup*>(this), nullptr);
 }
 
 RecordLayer* RecordLayer::openMenu(bool instant) {
@@ -159,7 +159,7 @@ RecordLayer* RecordLayer::openMenu(bool instant) {
     layer->m_noElasticity = instant || Global::get().speedhackEnabled;
     layer->show();
 
-    g.layer = static_cast<geode::Popup<>*>(layer);
+    g.layer = static_cast<geode::Popup*>(layer);
 
     return layer;
 }
@@ -516,7 +516,7 @@ void RecordLayer::onAutosaves(CCObject*) {
     std::filesystem::path path = Mod::get()->getSettingValue<std::filesystem::path>("autosaves_folder");
 
     if (std::filesystem::exists(path))
-        LoadMacroLayer::open(static_cast<geode::Popup<>*>(this), nullptr, true);
+        LoadMacroLayer::open(static_cast<geode::Popup*>(this), nullptr, true);
     else {
         FLAlertLayer::create("Error", "There was an error getting the folder. ID: 5", "Ok")->show();
     }
@@ -539,7 +539,8 @@ void RecordLayer::updateDots() {
     }
 }
 
-bool RecordLayer::setup() {
+bool RecordLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRect) {
+        if (!Popup::init(w, h, bg, bgRect)) return false;
     auto& g = Global::get();
     mod = g.mod;
 
@@ -1225,8 +1226,8 @@ void RecordLayer::onDiscord(CCObject*) {
         "Join the <cb>Discord</c> server?\n(<cl>discord.gg/w6yvdzVzBd</c>).",
         "No", "Yes",
         [](auto, bool btn2) {
-        	if (btn2)
-				geode::utils::web::openLinkInBrowser("https://discord.gg/w6yvdzVzBd");
+                if (btn2)
+                                geode::utils::web::openLinkInBrowser("https://discord.gg/w6yvdzVzBd");
         }
     );
 }

@@ -2,47 +2,47 @@
 
 #include "../includes.hpp"
 
-class RenderSettingsLayer : public geode::Popup<>, public TextInputDelegate {
-	
+class RenderSettingsLayer : public geode::Popup, public TextInputDelegate {
+        
 public:
 
-	Slider* sfxSlider = nullptr;
-	Slider* musicSlider = nullptr;
-	TextInput* fadeInInput = nullptr;
-	TextInput* fadeOutInput = nullptr;
-	TextInput* extensionInput = nullptr;
+        Slider* sfxSlider = nullptr;
+        Slider* musicSlider = nullptr;
+        TextInput* fadeInInput = nullptr;
+        TextInput* fadeOutInput = nullptr;
+        TextInput* extensionInput = nullptr;
 
-	CCTextInputNode* argsInput = nullptr;
-	CCTextInputNode* audioArgsInput = nullptr;
-	CCTextInputNode* secondsInput = nullptr;
-	CCTextInputNode* videoArgsInput = nullptr;
+        CCTextInputNode* argsInput = nullptr;
+        CCTextInputNode* audioArgsInput = nullptr;
+        CCTextInputNode* secondsInput = nullptr;
+        CCTextInputNode* videoArgsInput = nullptr;
 
-	CCMenuItemToggler* onlySongToggle = nullptr;
-	CCMenuItemToggler* recordAudioToggle = nullptr;
+        CCMenuItemToggler* onlySongToggle = nullptr;
+        CCMenuItemToggler* recordAudioToggle = nullptr;
 
-	Mod* mod = nullptr;
+        Mod* mod = nullptr;
 
 private:
 
-	bool setup() override;
+        bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) override;
 
 public:
 
-	STATIC_CREATE(RenderSettingsLayer, 396, 277)
-	
-	void open(CCObject*) {
-		create()->show();
-	}
+        STATIC_CREATE(RenderSettingsLayer, 396, 277)
+        
+        void open(CCObject*) {
+                create()->show();
+        }
 
-	void close(CCObject*) {
-		keyBackClicked();
-	}
+        void close(CCObject*) {
+                keyBackClicked();
+        }
 
-	void textChanged(CCTextInputNode* node) override;
+        void textChanged(CCTextInputNode* node) override;
 
-	void onSlider(CCObject*);
+        void onSlider(CCObject*);
 
-	void onDefaults(CCObject*);
+        void onDefaults(CCObject*);
 
-	void showInfoPopup(CCObject*);
+        void showInfoPopup(CCObject*);
 };
