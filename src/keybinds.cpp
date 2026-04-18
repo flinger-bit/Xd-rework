@@ -25,7 +25,7 @@ const std::vector<std::string> keybindIDs = {
 };
 
 class $modify(CCKeyboardDispatcher) {
-  bool dispatchKeyboardMSG(enumKeyCodes key, bool isKeyDown, bool isKeyRepeat) {
+  bool dispatchKeyboardMSG(enumKeyCodes key, bool isKeyDown, bool isKeyRepeat, bool unk) {
   
     auto& g = Global::get();
 
@@ -228,7 +228,7 @@ $execute{
     });
 
     for (int i = 0; i < keybindIDs.size(); i++) {
-        new EventListener([=](InvokeBindEvent* event) { onKeybind(event->isDown(), event->getID()); return ListenerResult::Propagate;
+        new EventListener<InvokeBindFilter>([=](InvokeBindEvent* event) { onKeybind(event->isDown(), event->getID()); return ListenerResult::Propagate;
         }, InvokeBindFilter(nullptr, (""_spr) + keybindIDs[i]));
     }
 

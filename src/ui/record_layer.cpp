@@ -137,9 +137,6 @@ RecordLayer* RecordLayer::openMenu(bool instant) {
     PlayLayer* pl = PlayLayer::get();
     bool cursor = false;
 
-    CCArray* children = CCDirector::sharedDirector()->getRunningScene()->getChildren();
-    CCObject* child;
-
     if (g.layer)
         static_cast<RecordLayer*>(g.layer)->onClose(nullptr);
 
