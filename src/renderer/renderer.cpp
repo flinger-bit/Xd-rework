@@ -1,4 +1,7 @@
 #include "../includes.hpp"
+
+#ifdef GEODE_IS_WINDOWS
+
 #include "../ui/game_ui.hpp"
 #include "../utils/subprocess.hpp"
 
@@ -803,8 +806,8 @@ void Renderer::startAudio(PlayLayer* pl) {
 void Renderer::stopAudio() {
     FMODAudioEngine::sharedEngine()->m_system->setOutput(FMOD_OUTPUTTYPE_AUTODETECT);
     auto fmod = FMODAudioEngine::sharedEngine();
-	fmod->m_globalChannel->setVolume(ogSFXVol);
-	fmod->m_backgroundMusicChannel->setVolume(ogMusicVol);
+        fmod->m_globalChannel->setVolume(ogSFXVol);
+        fmod->m_backgroundMusicChannel->setVolume(ogMusicVol);
 
     recordingAudio = false;
     if (PlayLayer* pl = PlayLayer::get())
@@ -815,8 +818,8 @@ void Renderer::stopAudio() {
 void Renderer::handleAudioRecording(PlayLayer* pl, int frame) {
     auto& g = Global::get();
     
-	fmod->m_globalChannel->setVolume(SFXVolume);
-	fmod->m_backgroundMusicChannel->setVolume(musicVolume);
+        fmod->m_globalChannel->setVolume(SFXVolume);
+        fmod->m_backgroundMusicChannel->setVolume(musicVolume);
 
     if (!pl) {
         g.renderer.stopAudio();
@@ -836,3 +839,5 @@ void Renderer::handleAudioRecording(PlayLayer* pl, int frame) {
     else
         g.renderer.stopAudio();
 }
+
+#endif // GEODE_IS_WINDOWS
