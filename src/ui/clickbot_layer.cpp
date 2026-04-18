@@ -35,13 +35,13 @@ bool ClickbotLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRec
         CCMenu* menu = CCMenu::create();
         m_mainLayer->addChild(menu);
 
-        CCScale9Sprite* bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-        bg->setColor({ 0,0,0 });
-        bg->setOpacity(78);
-        bg->setPosition(ccp(-79, -10));
-        bg->setAnchorPoint({ 0.5, 0.5 });
-        bg->setContentSize({ 245, 203 });
-        menu->addChild(bg);
+        auto* bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+        bgSpr->setColor({ 0,0,0 });
+        bgSpr->setOpacity(78);
+        bgSpr->setPosition(ccp(-79, -10));
+        bgSpr->setAnchorPoint({ 0.5, 0.5 });
+        bgSpr->setContentSize({ 245, 203 });
+        menu->addChild(bgSpr);
 
         CCLabelBMFont* lbl = CCLabelBMFont::create("Clicks", "goldFont.fnt");
         lbl->setPosition(ccp(-80, 78));
@@ -53,14 +53,14 @@ bool ClickbotLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRec
         lbl->setScale(0.35);
         menu->addChild(lbl);
 
-        bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-        bg->setScale(0.375);
-        bg->setColor({ 0,0,0 });
-        bg->setOpacity(78);
-        bg->setPosition(ccp(-150, 35));
-        bg->setAnchorPoint({ 0.5, 0.5 });
-        bg->setContentSize({ 230, 55 });
-        menu->addChild(bg);
+        bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+        bgSpr->setScale(0.375);
+        bgSpr->setColor({ 0,0,0 });
+        bgSpr->setOpacity(78);
+        bgSpr->setPosition(ccp(-150, 35));
+        bgSpr->setAnchorPoint({ 0.5, 0.5 });
+        bgSpr->setContentSize({ 230, 55 });
+        menu->addChild(bgSpr);
 
         lbl = CCLabelBMFont::create("easter egg", "chatFont.fnt");
         lbl->setPosition(ccp(-150, 35));
@@ -80,14 +80,14 @@ bool ClickbotLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRec
         lbl->setScale(0.35);
         menu->addChild(lbl);
 
-        bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-        bg->setScale(0.375);
-        bg->setColor({ 0,0,0 });
-        bg->setOpacity(78);
-        bg->setPosition(ccp(-29, 35));
-        bg->setAnchorPoint({ 0.5, 0.5 });
-        bg->setContentSize({ 230, 55 });
-        menu->addChild(bg);
+        bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+        bgSpr->setScale(0.375);
+        bgSpr->setColor({ 0,0,0 });
+        bgSpr->setOpacity(78);
+        bgSpr->setPosition(ccp(-29, 35));
+        bgSpr->setAnchorPoint({ 0.5, 0.5 });
+        bgSpr->setContentSize({ 230, 55 });
+        menu->addChild(bgSpr);
 
         lbl = CCLabelBMFont::create("easter egg", "chatFont.fnt");
         lbl->setPosition(ccp(-29, 35));
@@ -105,14 +105,14 @@ bool ClickbotLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRec
         lbl->setScale(0.35);
         menu->addChild(lbl);
 
-        bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-        bg->setScale(0.375);
-        bg->setColor({ 0,0,0 });
-        bg->setOpacity(78);
-        bg->setPosition(ccp(-150, -22));
-        bg->setAnchorPoint({ 0.5, 0.5 });
-        bg->setContentSize({ 230, 55 });
-        menu->addChild(bg);
+        bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+        bgSpr->setScale(0.375);
+        bgSpr->setColor({ 0,0,0 });
+        bgSpr->setOpacity(78);
+        bgSpr->setPosition(ccp(-150, -22));
+        bgSpr->setAnchorPoint({ 0.5, 0.5 });
+        bgSpr->setContentSize({ 230, 55 });
+        menu->addChild(bgSpr);
 
         lbl = CCLabelBMFont::create("easter egg", "chatFont.fnt");
         lbl->setPosition(ccp(-150, -22));
@@ -130,14 +130,14 @@ bool ClickbotLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRec
         lbl->setScale(0.35);
         menu->addChild(lbl);
 
-        bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-        bg->setScale(0.375);
-        bg->setColor({ 0,0,0 });
-        bg->setOpacity(78);
-        bg->setPosition(ccp(-29, -22));
-        bg->setAnchorPoint({ 0.5, 0.5 });
-        bg->setContentSize({ 230, 55 });
-        menu->addChild(bg);
+        bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+        bgSpr->setScale(0.375);
+        bgSpr->setColor({ 0,0,0 });
+        bgSpr->setOpacity(78);
+        bgSpr->setPosition(ccp(-29, -22));
+        bgSpr->setAnchorPoint({ 0.5, 0.5 });
+        bgSpr->setContentSize({ 230, 55 });
+        menu->addChild(bgSpr);
 
         lbl = CCLabelBMFont::create("easter egg", "chatFont.fnt");
         lbl->setPosition(ccp(-29, -22));
@@ -155,14 +155,14 @@ bool ClickbotLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRec
         lbl->setScale(0.35);
         menu->addChild(lbl);
 
-        bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-        bg->setScale(0.375);
-        bg->setColor({ 0,0,0 });
-        bg->setOpacity(78);
-        bg->setPosition(ccp(-150, -79));
-        bg->setAnchorPoint({ 0.5, 0.5 });
-        bg->setContentSize({ 230, 55 });
-        menu->addChild(bg);
+        bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+        bgSpr->setScale(0.375);
+        bgSpr->setColor({ 0,0,0 });
+        bgSpr->setOpacity(78);
+        bgSpr->setPosition(ccp(-150, -79));
+        bgSpr->setAnchorPoint({ 0.5, 0.5 });
+        bgSpr->setContentSize({ 230, 55 });
+        menu->addChild(bgSpr);
 
         lbl = CCLabelBMFont::create("easter egg", "chatFont.fnt");
         lbl->setPosition(ccp(-150, -79));
@@ -180,14 +180,14 @@ bool ClickbotLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRec
         lbl->setScale(0.35);
         menu->addChild(lbl);
 
-        bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-        bg->setScale(0.375);
-        bg->setColor({ 0,0,0 });
-        bg->setOpacity(78);
-        bg->setPosition(ccp(-29, -79));
-        bg->setAnchorPoint({ 0.5, 0.5 });
-        bg->setContentSize({ 230, 55 });
-        menu->addChild(bg);
+        bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+        bgSpr->setScale(0.375);
+        bgSpr->setColor({ 0,0,0 });
+        bgSpr->setOpacity(78);
+        bgSpr->setPosition(ccp(-29, -79));
+        bgSpr->setAnchorPoint({ 0.5, 0.5 });
+        bgSpr->setContentSize({ 230, 55 });
+        menu->addChild(bgSpr);
 
         lbl = CCLabelBMFont::create("easter egg", "chatFont.fnt");
         lbl->setPosition(ccp(-29, -79));
@@ -200,13 +200,13 @@ bool ClickbotLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRec
         btn->setID("release_right");
         menu->addChild(btn);
 
-        bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-        bg->setColor({ 0,0,0 });
-        bg->setOpacity(78);
-        bg->setPosition(ccp(128, -10));
-        bg->setAnchorPoint({ 0.5, 0.5 });
-        bg->setContentSize({ 148, 203 });
-        menu->addChild(bg);
+        bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+        bgSpr->setColor({ 0,0,0 });
+        bgSpr->setOpacity(78);
+        bgSpr->setPosition(ccp(128, -10));
+        bgSpr->setAnchorPoint({ 0.5, 0.5 });
+        bgSpr->setContentSize({ 148, 203 });
+        menu->addChild(bgSpr);
 
         lbl = CCLabelBMFont::create("Settings", "goldFont.fnt");
         lbl->setPosition(ccp(128, 78));
@@ -317,13 +317,13 @@ bool ClickSettingsLayer::init(float w, float h, const char* bg, cocos2d::CCRect 
 
         if (!std::filesystem::exists(settings.path)) filename = "N/A";
 
-        CCScale9Sprite* bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-        bg->setColor({ 0,0,0 });
-        bg->setScale(0.6f);
-        bg->setOpacity(88);
-        bg->setPosition(ccp(-37.5, 52));
-        bg->setContentSize({ 230, 55 });
-        menu->addChild(bg);
+        auto* bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+        bgSpr->setColor({ 0,0,0 });
+        bgSpr->setScale(0.6f);
+        bgSpr->setOpacity(88);
+        bgSpr->setPosition(ccp(-37.5, 52));
+        bgSpr->setContentSize({ 230, 55 });
+        menu->addChild(bgSpr);
 
         filenameLabel = CCLabelBMFont::create(filename.c_str(), "chatFont.fnt");
         filenameLabel->setPosition(ccp(-37.5, 52));
