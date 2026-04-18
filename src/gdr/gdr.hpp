@@ -4,7 +4,7 @@
 #include <vector>
 #include <optional>
 
-#include <nlohmann/json.hpp>
+#include "json.hpp"
 
 #include <Geode/utils/VersionInfo.hpp>
 
