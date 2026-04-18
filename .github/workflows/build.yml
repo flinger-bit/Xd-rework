@@ -10,18 +10,15 @@ on:
 
 jobs:
   build:
-    name: Build on ${{ matrix.config.os }}
-    runs-on: ${{ matrix.config.os }}
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        config:
-          - os: windows-latest
-            extra-flags: ""
-          - os: ubuntu-latest
-            extra-flags: ""
-          - os: macos-latest
-            extra-flags: ""
+        os:
+          - windows-latest
+          - macos-latest
+          - ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -30,14 +27,13 @@ jobs:
         uses: geode-sdk/build-geode-mod@main
         with:
           sdk: v5.6.1
-          extra-flags: ${{ matrix.config.extra-flags }}
           build-config: RelWithDebInfo
           export-pdb: true
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.config.os }}-build
+          name: ${{ matrix.os }}-build
           path: |
             build/*.geode
             build/*.pdb
