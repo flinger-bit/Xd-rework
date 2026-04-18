@@ -463,8 +463,8 @@ bool RenderSettingsLayer::init(float w, float h, const char* bg, cocos2d::CCRect
     menu->addChild(btn);
 
     if (usingApi) {
-        argsInput->setOpacity(100);
-        audioArgsInput->setOpacity(100);
+        static_cast<CCNode*>(argsInput)->setOpacity(100);
+        static_cast<CCNode*>(audioArgsInput)->setOpacity(100);
 
         argsInput->setID("disabled-input"_spr);
         audioArgsInput->setID("disabled-input"_spr);

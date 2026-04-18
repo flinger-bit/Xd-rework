@@ -148,9 +148,9 @@ void LoadMacroLayer::onImportMacro(CCObject*) {
         textFilter.files = { "*.gdr", "*.xd", "*.json" };
         fileOptions.filters.push_back(textFilter);
 
-        file::pick(file::PickMode::OpenFile, { dirs::getGameDir(), { textFilter } }).listen([this](Result<std::filesystem::path>* res) {
-                if (res->isOk()) {
-                        std::filesystem::path path = res->unwrapOrDefault();
+        file::pick(file::PickMode::OpenFile, { dirs::getGameDir(), { textFilter } }).then([this](Result<std::optional<std::filesystem::path>> res) {
+                if (res.isOk() && res.unwrap().has_value()) {
+                        std::filesystem::path path = res.unwrap().value();
 
                         auto& g = Global::get();
                         Macro tempMacro;
@@ -202,7 +202,7 @@ void LoadMacroLayer::onImportMacro(CCObject*) {
 
                         pathString += ".gdr.json";
 
-                        std::ofstream f2(Utils::widen(pathString), std::ios::binary);
+                        std::ofstream f2(pathString, std::ios::binary);
                         auto data = tempMacro.exportData(true);
 
                         f2.write(reinterpret_cast<const char*>(data.data()), data.size());
@@ -697,7 +697,7 @@ void MacroCell::handleLoad() {
 
                 if (mergeLayer) {
                         typeinfo_cast<MacroEditLayer*>(mergeLayer)->mergeMacro(newMacro.inputs, players, static_cast<LoadMacroLayer*>(loadLayer)->owToggle->isToggled());
-                        loadLayer->onClose(nullptr);
+                        loadLayer->removeFromParentAndCleanup(true);
                 }
 
                 return;
@@ -711,7 +711,7 @@ void MacroCell::handleLoad() {
 
     g.macro.xdBotMacro = g.macro.botInfo.name == "xdBot";
 
-        loadLayer->onClose(nullptr);
+        loadLayer->removeFromParentAndCleanup(true);
 
         RecordLayer* newLayer = nullptr;
 

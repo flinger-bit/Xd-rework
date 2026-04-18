@@ -6,7 +6,7 @@ class AutoSaveLayer : public geode::Popup, public TextInputDelegate {
 
     TextInput* intervalInput = nullptr;
 
-    bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) override {
+    bool init(float w, float h, const char* bg = "GJ_square01.png", cocos2d::CCRect bgRect = {}) {
         if (!Popup::init(w, h, bg, bgRect)) return false;
         setTitle("Autosave Settings");
 

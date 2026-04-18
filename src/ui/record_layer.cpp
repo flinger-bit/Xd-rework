@@ -1121,7 +1121,7 @@ void RecordLayer::loadSetting(RecordSetting sett, float yPos) {
         bgSpr->setAnchorPoint({ 0, 1 });
         bgSpr->setContentSize({ 258, 55 });
         bgSpr->setZOrder(29);
-        nodes.push_back(static_cast<CCNode*>(bg));
+        nodes.push_back(static_cast<CCNode*>(bgSpr));
         menu->addChild(bgSpr);
 
         seedInput = CCTextInputNode::create(150, 30, "Seed", "chatFont.fnt");
