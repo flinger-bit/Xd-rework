@@ -403,21 +403,19 @@ void ClickSettingsLayer::onSelectFile(CCObject*) {
         textFilter.files = { "*.mp3", "*.ogg" };
         fileOptions.filters.push_back(textFilter);
 
-        m_pickerTask.bind([this](geode::Task<geode::Result<std::optional<std::filesystem::path>>>::Event* e) {
-                if (auto* val = e->getValue()) {
-                        if (val->isOk() && val->unwrap().has_value()) {
-                                std::filesystem::path path = val->unwrap().value();
-
+#ifndef GEODE_IS_ANDROID
+        file::pick(file::PickMode::OpenFile, { Mod::get()->getResourcesDir(), { textFilter } }).listen(
+                [this](Result<std::filesystem::path>* res) {
+                        if (res->isOk()) {
+                                std::filesystem::path path = res->unwrap();
                                 filenameLabel->setString(path.filename().string().c_str());
-
                                 settings.path = path;
                                 saveSettings();
-
                                 static_cast<ClickbotLayer*>(clickbotLayer)->updateLabels();
                         }
                 }
-        });
-        m_pickerTask.setFilter(file::pick(file::PickMode::OpenFile, { Mod::get()->getResourcesDir(), { textFilter } }));
+        );
+#endif
 }
 
 void ClickSettingsLayer::onRestore(CCObject*) {

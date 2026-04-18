@@ -148,77 +148,61 @@ void LoadMacroLayer::onImportMacro(CCObject*) {
         textFilter.files = { "*.gdr", "*.xd", "*.json" };
         fileOptions.filters.push_back(textFilter);
 
-        m_pickerTask.bind([this](geode::Task<geode::Result<std::optional<std::filesystem::path>>>::Event* e) {
-                if (auto* val = e->getValue()) {
-                if (val->isOk() && val->unwrap().has_value()) {
-                        std::filesystem::path path = val->unwrap().value();
+#ifndef GEODE_IS_ANDROID
+        file::pick(file::PickMode::OpenFile, { dirs::getGameDir(), { textFilter } }).listen(
+                [this](Result<std::filesystem::path>* res) {
+                        if (res->isOk()) {
+                                std::filesystem::path path = res->unwrap();
 
-                        auto& g = Global::get();
-                        Macro tempMacro;
+                                auto& g = Global::get();
+                                Macro tempMacro;
 
-                        if (path.extension() == ".xd") {
-                                tempMacro = Macro::XDtoGDR(path);
-
-                                if (tempMacro.description == "fail")
-                                        return FLAlertLayer::create("Error", "There was an error importing this macro. ID: 46", "Ok")->show();
-
-                        }
-                        else {
-
-                                std::ifstream f(path, std::ios::binary);
-
-                                f.seekg(0, std::ios::end);
-                                size_t fileSize = f.tellg();
-                                f.seekg(0, std::ios::beg);
-
-                                std::vector<std::uint8_t> macroData(fileSize);
-
-                                f.read(reinterpret_cast<char*>(macroData.data()), fileSize);
-                                f.close();
-
-                                tempMacro = Macro::importData(macroData);
-
-                        }
-
-                        bool xdMacro = path.extension() == ".xd";
-
-                        int iterations = 0;
-
-                        std::string name = path.filename().string().substr(0, path.filename().string().find_last_of('.'));
-
-                        std::filesystem::path newPath = Mod::get()->getSettingValue<std::filesystem::path>("macros_folder") / name;
-
-                        std::string pathString = newPath.string();
-
-                        while (std::filesystem::exists(pathString + ".gdr.json")) {
-                                iterations++;
-
-                                if (iterations > 1) {
-                                        int length = 3 + std::to_string(iterations - 1).length();
-                                        pathString.erase(pathString.length() - length, length);
+                                if (path.extension() == ".xd") {
+                                        tempMacro = Macro::XDtoGDR(path);
+                                        if (tempMacro.description == "fail") {
+                                                FLAlertLayer::create("Error", "There was an error importing this macro. ID: 46", "Ok")->show();
+                                                return;
+                                        }
+                                } else {
+                                        std::ifstream f(path, std::ios::binary);
+                                        f.seekg(0, std::ios::end);
+                                        size_t fileSize = f.tellg();
+                                        f.seekg(0, std::ios::beg);
+                                        std::vector<std::uint8_t> macroData(fileSize);
+                                        f.read(reinterpret_cast<char*>(macroData.data()), fileSize);
+                                        f.close();
+                                        tempMacro = Macro::importData(macroData);
                                 }
 
-                                pathString += fmt::format(" ({})", std::to_string(iterations));
+                                bool xdMacro = path.extension() == ".xd";
+                                int iterations = 0;
+                                std::string name = path.filename().string().substr(0, path.filename().string().find_last_of('.'));
+                                std::filesystem::path newPath = Mod::get()->getSettingValue<std::filesystem::path>("macros_folder") / name;
+                                std::string pathString = newPath.string();
+
+                                while (std::filesystem::exists(pathString + ".gdr.json")) {
+                                        iterations++;
+                                        if (iterations > 1) {
+                                                int length = 3 + std::to_string(iterations - 1).length();
+                                                pathString.erase(pathString.length() - length, length);
+                                        }
+                                        pathString += fmt::format(" ({})", std::to_string(iterations));
+                                }
+
+                                pathString += ".gdr.json";
+                                std::ofstream f2(pathString, std::ios::binary);
+                                auto data = tempMacro.exportData(true);
+                                f2.write(reinterpret_cast<const char*>(data.data()), data.size());
+                                f2.close();
+
+                                this->reloadList(0);
+                                if (xdMacro)
+                                        FLAlertLayer::create("Warning", "<cl>.xd</c> extension macros may not function correctly in this version.", "Ok")->show();
+                                Notification::create("Macro Imported", NotificationIcon::Success)->show();
                         }
-
-                        pathString += ".gdr.json";
-
-                        std::ofstream f2(pathString, std::ios::binary);
-                        auto data = tempMacro.exportData(true);
-
-                        f2.write(reinterpret_cast<const char*>(data.data()), data.size());
-                        f2.close();
-
-                        this->reloadList(0);
-
-                        if (xdMacro)
-                                FLAlertLayer::create("Warning", "<cl>.xd</c> extension macros may not function correctly in this version.", "Ok")->show();
-
-                        Notification::create("Macro Imported", NotificationIcon::Success)->show();
                 }
-                } // if (auto* val)
-        });
-        m_pickerTask.setFilter(file::pick(file::PickMode::OpenFile, { dirs::getGameDir(), { textFilter } }));
+        );
+#endif
 }
 
 bool LoadMacroLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRect) {
