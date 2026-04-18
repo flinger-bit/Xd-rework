@@ -13,6 +13,8 @@ private:
     ClickSetting settings;
     std::string button;
 
+    EventListener<Task<Result<std::optional<std::filesystem::path>>>> m_pickerTask;
+
     Slider* volumeSlider = nullptr;
     Slider* pitchSlider = nullptr;
 

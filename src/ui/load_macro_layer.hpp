@@ -42,6 +42,8 @@ public:
 class LoadMacroLayer : public geode::Popup, public TextInputDelegate {
 public:
 
+        EventListener<Task<Result<std::optional<std::filesystem::path>>>> m_pickerTask;
+
         geode::Popup* menuLayer = nullptr;
         geode::Popup* mergeLayer = nullptr;
         CCMenu* menu = nullptr;

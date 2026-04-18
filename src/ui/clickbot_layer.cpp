@@ -403,18 +403,21 @@ void ClickSettingsLayer::onSelectFile(CCObject*) {
         textFilter.files = { "*.mp3", "*.ogg" };
         fileOptions.filters.push_back(textFilter);
 
-        file::pick(file::PickMode::OpenFile, { Mod::get()->getResourcesDir(), { textFilter } }).then([this](Result<std::optional<std::filesystem::path>> res) {
-                if (res.isOk() && res.unwrap().has_value()) {
-                        std::filesystem::path path = res.unwrap().value();
+        m_pickerTask.bind([this](Task<Result<std::optional<std::filesystem::path>>>::Event* e) {
+                if (auto* val = e->getValue()) {
+                        if (val->isOk() && val->unwrap().has_value()) {
+                                std::filesystem::path path = val->unwrap().value();
 
-                        filenameLabel->setString(path.filename().string().c_str());
+                                filenameLabel->setString(path.filename().string().c_str());
 
-                        settings.path = path;
-                        saveSettings();
+                                settings.path = path;
+                                saveSettings();
 
-                        static_cast<ClickbotLayer*>(clickbotLayer)->updateLabels();
+                                static_cast<ClickbotLayer*>(clickbotLayer)->updateLabels();
+                        }
                 }
-                });
+        });
+        m_pickerTask.setFilter(file::pick(file::PickMode::OpenFile, { Mod::get()->getResourcesDir(), { textFilter } }));
 }
 
 void ClickSettingsLayer::onRestore(CCObject*) {

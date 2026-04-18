@@ -463,8 +463,7 @@ bool RenderSettingsLayer::init(float w, float h, const char* bg, cocos2d::CCRect
     menu->addChild(btn);
 
     if (usingApi) {
-        static_cast<CCNode*>(argsInput)->setOpacity(100);
-        static_cast<CCNode*>(audioArgsInput)->setOpacity(100);
+        /* CCTextInputNode does not implement CCRGBAProtocol on Android */
 
         argsInput->setID("disabled-input"_spr);
         audioArgsInput->setID("disabled-input"_spr);

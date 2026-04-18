@@ -148,9 +148,10 @@ void LoadMacroLayer::onImportMacro(CCObject*) {
         textFilter.files = { "*.gdr", "*.xd", "*.json" };
         fileOptions.filters.push_back(textFilter);
 
-        file::pick(file::PickMode::OpenFile, { dirs::getGameDir(), { textFilter } }).then([this](Result<std::optional<std::filesystem::path>> res) {
-                if (res.isOk() && res.unwrap().has_value()) {
-                        std::filesystem::path path = res.unwrap().value();
+        m_pickerTask.bind([this](Task<Result<std::optional<std::filesystem::path>>>::Event* e) {
+                if (auto* val = e->getValue()) {
+                if (val->isOk() && val->unwrap().has_value()) {
+                        std::filesystem::path path = val->unwrap().value();
 
                         auto& g = Global::get();
                         Macro tempMacro;
@@ -215,7 +216,9 @@ void LoadMacroLayer::onImportMacro(CCObject*) {
 
                         Notification::create("Macro Imported", NotificationIcon::Success)->show();
                 }
-                });
+                } // if (auto* val)
+        });
+        m_pickerTask.setFilter(file::pick(file::PickMode::OpenFile, { dirs::getGameDir(), { textFilter } }));
 }
 
 bool LoadMacroLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRect) {
