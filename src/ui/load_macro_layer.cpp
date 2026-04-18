@@ -148,7 +148,7 @@ void LoadMacroLayer::onImportMacro(CCObject*) {
         textFilter.files = { "*.gdr", "*.xd", "*.json" };
         fileOptions.filters.push_back(textFilter);
 
-        m_pickerTask.bind([this](Task<Result<std::optional<std::filesystem::path>>>::Event* e) {
+        m_pickerTask.bind([this](geode::Task<geode::Result<std::optional<std::filesystem::path>>>::Event* e) {
                 if (auto* val = e->getValue()) {
                 if (val->isOk() && val->unwrap().has_value()) {
                         std::filesystem::path path = val->unwrap().value();

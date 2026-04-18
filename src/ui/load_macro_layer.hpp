@@ -5,6 +5,8 @@
 #include <locale>
 #include <string>
 #include <ctime>
+#include <Geode/loader/Event.hpp>
+#include <Geode/utils/Task.hpp>
 
 class MacroCell : public CCNode {
         std::string name;
@@ -42,7 +44,7 @@ public:
 class LoadMacroLayer : public geode::Popup, public TextInputDelegate {
 public:
 
-        EventListener<Task<Result<std::optional<std::filesystem::path>>>> m_pickerTask;
+        geode::EventListener<geode::Task<geode::Result<std::optional<std::filesystem::path>>>> m_pickerTask;
 
         geode::Popup* menuLayer = nullptr;
         geode::Popup* mergeLayer = nullptr;

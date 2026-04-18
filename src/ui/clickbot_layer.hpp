@@ -3,6 +3,8 @@
 #include "../includes.hpp"
 #include "../hacks/clickbot.hpp"
 #include "record_layer.hpp"
+#include <Geode/loader/Event.hpp>
+#include <Geode/utils/Task.hpp>
 
 const std::unordered_map<int, std::string> buttons = { {1, ""} };
 
@@ -13,7 +15,7 @@ private:
     ClickSetting settings;
     std::string button;
 
-    EventListener<Task<Result<std::optional<std::filesystem::path>>>> m_pickerTask;
+    geode::EventListener<geode::Task<geode::Result<std::optional<std::filesystem::path>>>> m_pickerTask;
 
     Slider* volumeSlider = nullptr;
     Slider* pitchSlider = nullptr;
