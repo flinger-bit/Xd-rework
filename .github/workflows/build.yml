@@ -30,37 +30,46 @@ jobs:
           sdk: v5.6.1
           target: ${{ matrix.config.target }}
           build-config: RelWithDebInfo
-          combine: true
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.config.target }}-build
           path: build/*.geode
-          if-no-files-found: ignore
+          if-no-files-found: warn
 
   package:
     name: Package combined .geode
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Download all build artifacts
+      - name: Download Android64 build
         uses: actions/download-artifact@v4
         with:
-          path: artifacts/
+          name: Android64-build
+          path: out/
 
-      - name: Merge .geode files
-        uses: geode-sdk/build-geode-mod/merge@main
+      - name: Download Android32 build
+        uses: actions/download-artifact@v4
         with:
-          path: artifacts/
+          name: Android32-build
+          path: tmp32/
+
+      - name: Merge Android32 binary into Android64 .geode
+        run: |
+          GEODE=$(ls out/*.geode | head -1)
+          SO32=$(find tmp32/ -name "*.so" | head -1)
+          if [ -n "$SO32" ] && [ -n "$GEODE" ]; then
+            echo "Merging $SO32 into $GEODE"
+            zip -j "$GEODE" "$SO32"
+          fi
+          ls -lh out/
 
       - name: Upload final .geode
         uses: actions/upload-artifact@v4
         with:
           name: Xd-rework
-          path: "*.geode"
+          path: out/*.geode
           if-no-files-found: warn
 
   release:
