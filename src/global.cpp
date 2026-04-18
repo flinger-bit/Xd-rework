@@ -60,7 +60,7 @@ bool Global::hasIncompatibleMods() {
 
   if (Mod* mod = Loader::get()->getLoadedMod("tobyadd.gdh")) {
     std::filesystem::path configPath = mod->getSaveDir() / "config.json";
-	  using namespace nlohmann;
+          using namespace nlohmann;
 
     if (std::filesystem::exists(configPath)) {
       std::ifstream jsonFile(configPath);
@@ -79,7 +79,7 @@ bool Global::hasIncompatibleMods() {
 
   if (Mod* mod = Loader::get()->getLoadedMod("tobyadd.gdh_mobile")) {
     std::filesystem::path configPath = mod->getSaveDir() / "config.json";
-	  using namespace nlohmann;
+          using namespace nlohmann;
     
     if (std::filesystem::exists(configPath)) {
       std::ifstream jsonFile(configPath);
@@ -158,18 +158,14 @@ float Global::getTPS() {
 }
 
 int Global::getCurrentFrame(bool editor) {
-  // double levelTime;
   PlayLayer* pl = PlayLayer::get();
 
   if (!pl) {
     if (!editor) return 0;
-
-    // levelTime = GJBaseGameLayer::get()->m_gameState.m_levelTime;
   }
 
   auto& g = Global::get();
   int frame;
-  // levelTime = pl->m_gameState.m_levelTime;
 
   if (!g.macro.xdBotMacro && g.state == state::playing) {
     frame = pl->m_gameState.m_currentProgress;
@@ -481,5 +477,5 @@ $execute{
 
   g.macro.author = "N/A";
   g.macro.description = "N/A";
-  g.macro.gameVersion = 2.206;
+  g.macro.gameVersion = 2.2081;
 };

@@ -5,11 +5,11 @@
         "mac": "2.2081",
         "android": "2.2081"
     },
-    "version": "1.0.0",
+    "version": "2.4.1",
     "id": "flinger-bit.xd-rework",
     "name": "Xd-rework",
     "developer": "flinger-bit",
-    "description": "A rework of xdBot for Geode 5.6.1 and GD 2.2081",
+    "description": "A feature-rich macro bot reworked from xdBot — supports recording, playback, renderer, clickbot, and more.",
     "dependencies": [
         {
             "id": "geode.custom-keybinds",

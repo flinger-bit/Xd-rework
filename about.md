@@ -1,6 +1,6 @@
-# xdBot
+# Xd-rework
 
-<cl>xdBot</c> is a simple botting tool designed to be easy for anyone to use; intended for <cg>showcases</c>.
+<cl>Xd-rework</c> is a feature-rich macro bot designed to be easy for anyone to use; intended for <cg>showcases</c>.
 
 # Features
 
@@ -34,6 +34,6 @@
 
 * Thanks to Viper for letting me use their Safe Mode implementation.
 
-* Thanks to ReplayBot for being open source and letting me steal the code for the renderer.
+* Thanks to ReplayBot for being open source and letting me use the code for the renderer.
 
 * Thanks to CatXus and Aadam_yes for helping me test the early android versions.

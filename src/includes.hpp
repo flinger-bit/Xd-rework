@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Geode/Geode.hpp>
-// #include <Geode/loader/SettingEvent.hpp>
 
 #include <string>
 #include <thread>
