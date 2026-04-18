@@ -21,7 +21,7 @@ jobs:
           - target: Win64
             os: windows-latest
           - target: macOS
-            os: macos-latest
+            os: macos-13
           - target: Android64
             os: ubuntu-latest
           - target: Android32

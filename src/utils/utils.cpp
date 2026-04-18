@@ -163,7 +163,7 @@ std::vector<std::string> Utils::splitByChar(std::string str, char splitChar) {
 std::string Utils::getTexture() {
     cocos2d::ccColor3B color = Mod::get()->getSettingValue<cocos2d::ccColor3B>("background_color");
     
-	std::string texture = color == ccc3(51, 68, 153) ? "GJ_square02.png" : "GJ_square06.png";
+        std::string texture = color == ccc3(51, 68, 153) ? "GJ_square02.png" : "GJ_square06.png";
 
     return texture;
 }
@@ -182,11 +182,3 @@ std::string Utils::getSimplifiedString(std::string str) {
     return str;
 }
 
-void Utils::setBackgroundColor(cocos2d::extension::CCScale9Sprite* bg) {
-    cocos2d::ccColor3B color = Mod::get()->getSettingValue<cocos2d::ccColor3B>("background_color");
-
-	if (color == ccc3(51, 68, 153))
-		color = ccc3(255, 255, 255);
-
-	bg->setColor(color);
-}

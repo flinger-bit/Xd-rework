@@ -303,14 +303,14 @@ bool MacroEditLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRe
     btn->setPosition({xPos + 120, yPos - 35});
     selectedInputMenu->addChild(btn);
     
-    CCScale9Sprite* bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setColor({ 0,0,0 });
-    bg->setScale(0.3125f);
-    bg->setOpacity(90);
-    bg->setPosition({xPos + 91, yPos - 35});
-    bg->setAnchorPoint({ 0.5, 0.5 });
-    bg->setContentSize({ 140, 60 });
-    selectedInputMenu->addChild(bg);
+    auto* bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    bgSpr->setColor({ 0,0,0 });
+    bgSpr->setScale(0.3125f);
+    bgSpr->setOpacity(90);
+    bgSpr->setPosition({xPos + 91, yPos - 35});
+    bgSpr->setAnchorPoint({ 0.5, 0.5 });
+    bgSpr->setContentSize({ 140, 60 });
+    selectedInputMenu->addChild(bgSpr);
 
     buttonLabel = CCLabelBMFont::create("Left", "bigFont.fnt");
     buttonLabel->setScale(0.375f);
@@ -335,14 +335,14 @@ bool MacroEditLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRe
     btn->setPosition({xPos + 120, yPos - 66});
     selectedInputMenu->addChild(btn);
     
-    bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setColor({ 0,0,0 });
-    bg->setScale(0.3125f);
-    bg->setOpacity(90);
-    bg->setPosition({xPos + 91, yPos - 66});
-    bg->setAnchorPoint({ 0.5, 0.5 });
-    bg->setContentSize({ 140, 60 });
-    selectedInputMenu->addChild(bg);
+    bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    bgSpr->setColor({ 0,0,0 });
+    bgSpr->setScale(0.3125f);
+    bgSpr->setOpacity(90);
+    bgSpr->setPosition({xPos + 91, yPos - 66});
+    bgSpr->setAnchorPoint({ 0.5, 0.5 });
+    bgSpr->setContentSize({ 140, 60 });
+    selectedInputMenu->addChild(bgSpr);
 
     actionLabel = CCLabelBMFont::create("Hold", "bigFont.fnt");
     actionLabel->setScale(0.375f);
@@ -367,14 +367,14 @@ bool MacroEditLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRe
     btn->setPosition({xPos + 120, yPos - 97});
     selectedInputMenu->addChild(btn);
 
-    bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setColor({ 0,0,0 });
-    bg->setScale(0.3125f);
-    bg->setOpacity(90);
-    bg->setPosition({xPos + 91, yPos - 97});
-    bg->setAnchorPoint({ 0.5, 0.5 });
-    bg->setContentSize({ 140, 60 });
-    selectedInputMenu->addChild(bg);
+    bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    bgSpr->setColor({ 0,0,0 });
+    bgSpr->setScale(0.3125f);
+    bgSpr->setOpacity(90);
+    bgSpr->setPosition({xPos + 91, yPos - 97});
+    bgSpr->setAnchorPoint({ 0.5, 0.5 });
+    bgSpr->setContentSize({ 140, 60 });
+    selectedInputMenu->addChild(bgSpr);
 
     playerLabel = CCLabelBMFont::create("One", "bigFont.fnt");
     playerLabel->setScale(0.375f);

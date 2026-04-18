@@ -191,13 +191,13 @@ bool ButtonEditLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgR
     selectedLbl->setPositionY(121);
     menu->addChild(selectedLbl);
 
-    CCScale9Sprite* bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setColor({ 0,0,0 });
-    bg->setOpacity(78);
-    bg->setPositionY(77);
-    bg->setAnchorPoint({ 0.5, 0.5 });
-    bg->setContentSize({ 180, 60 });
-    menu->addChild(bg);
+    auto* bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    bgSpr->setColor({ 0,0,0 });
+    bgSpr->setOpacity(78);
+    bgSpr->setPositionY(77);
+    bgSpr->setAnchorPoint({ 0.5, 0.5 });
+    bgSpr->setContentSize({ 180, 60 });
+    menu->addChild(bgSpr);
 
     scaleLbl = CCLabelBMFont::create("Scale (1.0)", "chatFont.fnt");
     scaleLbl->setScale(0.625f);

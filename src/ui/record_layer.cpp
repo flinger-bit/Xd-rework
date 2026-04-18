@@ -607,31 +607,31 @@ bool RecordLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRect)
 
 #endif
 
-    CCScale9Sprite* bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setScale(0.7f);
-    bg->setColor({ 0,0,0 });
-    bg->setOpacity(75);
-    bg->setPosition(ccp(-212, 121));
-    bg->setAnchorPoint({ 0, 1 });
-    bg->setContentSize({ 275, 151 });
-    menu->addChild(bg);
+    auto* bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    bgSpr->setScale(0.7f);
+    bgSpr->setColor({ 0,0,0 });
+    bgSpr->setOpacity(75);
+    bgSpr->setPosition(ccp(-212, 121));
+    bgSpr->setAnchorPoint({ 0, 1 });
+    bgSpr->setContentSize({ 275, 151 });
+    menu->addChild(bgSpr);
 
-    bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setScale(0.7f);
-    bg->setColor({ 0,0,0 });
-    bg->setOpacity(75);
-    bg->setPosition(ccp(-212, 0));
-    bg->setAnchorPoint({ 0, 1 });
-    bg->setContentSize({ 275, 169 });
-    menu->addChild(bg);
+    bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    bgSpr->setScale(0.7f);
+    bgSpr->setColor({ 0,0,0 });
+    bgSpr->setOpacity(75);
+    bgSpr->setPosition(ccp(-212, 0));
+    bgSpr->setAnchorPoint({ 0, 1 });
+    bgSpr->setContentSize({ 275, 169 });
+    menu->addChild(bgSpr);
 
-    bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setScale(0.7f);
-    bg->setColor({ 0,0,0 });
-    bg->setOpacity(75);
-    bg->setPosition(ccp(103, 2));
-    bg->setContentSize({ 313, 339 });
-    menu->addChild(bg);
+    bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    bgSpr->setScale(0.7f);
+    bgSpr->setColor({ 0,0,0 });
+    bgSpr->setOpacity(75);
+    bgSpr->setPosition(ccp(103, 2));
+    bgSpr->setContentSize({ 313, 339 });
+    menu->addChild(bgSpr);
 
     recording = CCMenuItemToggler::create(spriteOff, spriteOn, this, menu_selector(RecordLayer::toggleRecording));
     recording->toggle(g.state == state::recording);
@@ -863,55 +863,55 @@ bool RecordLayer::init(float w, float h, const char* bg, cocos2d::CCRect bgRect)
     fpsInput->setDelegate(this);
     menu->addChild(fpsInput);
 
-    bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setScale(0.375f);
-    bg->setColor({ 0,0,0 });
-    bg->setOpacity(75);
-    bg->setPosition(ccp(-103.5, -21));
-    bg->setAnchorPoint({ 0, 1 });
-    bg->setContentSize({ 162, 55 });
-    bg->setZOrder(29);
-    menu->addChild(bg);
+    bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    bgSpr->setScale(0.375f);
+    bgSpr->setColor({ 0,0,0 });
+    bgSpr->setOpacity(75);
+    bgSpr->setPosition(ccp(-103.5, -21));
+    bgSpr->setAnchorPoint({ 0, 1 });
+    bgSpr->setContentSize({ 162, 55 });
+    bgSpr->setZOrder(29);
+    menu->addChild(bgSpr);
 
-    bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setScale(0.375f);
-    bg->setColor({ 0,0,0 });
-    bg->setOpacity(75);
-    bg->setPosition(ccp(-188, -21));
-    bg->setAnchorPoint({ 0, 1 });
-    bg->setContentSize({ 162, 55 });
-    bg->setZOrder(29);
-    menu->addChild(bg);
+    bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    bgSpr->setScale(0.375f);
+    bgSpr->setColor({ 0,0,0 });
+    bgSpr->setOpacity(75);
+    bgSpr->setPosition(ccp(-188, -21));
+    bgSpr->setAnchorPoint({ 0, 1 });
+    bgSpr->setContentSize({ 162, 55 });
+    bgSpr->setZOrder(29);
+    menu->addChild(bgSpr);
 
-    bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setScale(0.375f);
-    bg->setColor({ 0,0,0 });
-    bg->setOpacity(75);
-    bg->setPosition(ccp(-201.5, -49));
-    bg->setAnchorPoint({ 0, 1 });
-    bg->setContentSize({ 82, 55 });
-    bg->setZOrder(29);
-    menu->addChild(bg);
+    bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    bgSpr->setScale(0.375f);
+    bgSpr->setColor({ 0,0,0 });
+    bgSpr->setOpacity(75);
+    bgSpr->setPosition(ccp(-201.5, -49));
+    bgSpr->setAnchorPoint({ 0, 1 });
+    bgSpr->setContentSize({ 82, 55 });
+    bgSpr->setZOrder(29);
+    menu->addChild(bgSpr);
 
-    bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setScale(0.375f);
-    bg->setColor({ 0,0,0 });
-    bg->setOpacity(75);
-    bg->setPosition(ccp(-148.5, -49));
-    bg->setAnchorPoint({ 0, 1 });
-    bg->setContentSize({ 82, 55 });
-    bg->setZOrder(29);
-    menu->addChild(bg);
+    bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    bgSpr->setScale(0.375f);
+    bgSpr->setColor({ 0,0,0 });
+    bgSpr->setOpacity(75);
+    bgSpr->setPosition(ccp(-148.5, -49));
+    bgSpr->setAnchorPoint({ 0, 1 });
+    bgSpr->setContentSize({ 82, 55 });
+    bgSpr->setZOrder(29);
+    menu->addChild(bgSpr);
 
-    bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setScale(0.375f);
-    bg->setColor({ 0,0,0 });
-    bg->setOpacity(75);
-    bg->setPosition(ccp(-92, -49));
-    bg->setAnchorPoint({ 0, 1 });
-    bg->setContentSize({ 167, 55 });
-    bg->setZOrder(29);
-    menu->addChild(bg);
+    bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    bgSpr->setScale(0.375f);
+    bgSpr->setColor({ 0,0,0 });
+    bgSpr->setOpacity(75);
+    bgSpr->setPosition(ccp(-92, -49));
+    bgSpr->setAnchorPoint({ 0, 1 });
+    bgSpr->setContentSize({ 167, 55 });
+    bgSpr->setZOrder(29);
+    menu->addChild(bgSpr);
 
     ButtonSprite* spriteOn2 = ButtonSprite::create("Stop");
     spriteOn2->setScale(0.74f);
@@ -1059,16 +1059,16 @@ void RecordLayer::loadSetting(RecordSetting sett, float yPos) {
     }
 
     if (sett.input == InputType::Speedhack) {
-        CCScale9Sprite* bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-        bg->setPosition(ccp(110, yPos + 10));
-        bg->setScale(0.355f);
-        bg->setColor({ 0,0,0 });
-        bg->setOpacity(75);
-        bg->setAnchorPoint({ 0, 1 });
-        bg->setContentSize({ 100, 55 });
-        bg->setZOrder(29);
+        auto* bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+        bgSpr->setPosition(ccp(110, yPos + 10));
+        bgSpr->setScale(0.355f);
+        bgSpr->setColor({ 0,0,0 });
+        bgSpr->setOpacity(75);
+        bgSpr->setAnchorPoint({ 0, 1 });
+        bgSpr->setContentSize({ 100, 55 });
+        bgSpr->setZOrder(29);
         nodes.push_back(static_cast<CCNode*>(bg));
-        menu->addChild(bg);
+        menu->addChild(bgSpr);
 
         speedhackInput = CCTextInputNode::create(150, 30, "SH", "chatFont.fnt");
         speedhackInput->setPosition(ccp(127.5, yPos));
@@ -1123,16 +1123,16 @@ void RecordLayer::loadSetting(RecordSetting sett, float yPos) {
     }
 
     if (sett.input == InputType::Seed) {
-        CCScale9Sprite* bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-        bg->setPosition(ccp(64, yPos + 10));
-        bg->setScale(0.355f);
-        bg->setColor({ 0,0,0 });
-        bg->setOpacity(75);
-        bg->setAnchorPoint({ 0, 1 });
-        bg->setContentSize({ 258, 55 });
-        bg->setZOrder(29);
+        auto* bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+        bgSpr->setPosition(ccp(64, yPos + 10));
+        bgSpr->setScale(0.355f);
+        bgSpr->setColor({ 0,0,0 });
+        bgSpr->setOpacity(75);
+        bgSpr->setAnchorPoint({ 0, 1 });
+        bgSpr->setContentSize({ 258, 55 });
+        bgSpr->setZOrder(29);
         nodes.push_back(static_cast<CCNode*>(bg));
-        menu->addChild(bg);
+        menu->addChild(bgSpr);
 
         seedInput = CCTextInputNode::create(150, 30, "Seed", "chatFont.fnt");
         seedInput->setPosition(ccp(109.5, yPos));
@@ -1155,16 +1155,16 @@ void RecordLayer::loadSetting(RecordSetting sett, float yPos) {
     }
 
     if (sett.input == InputType::Respawn) {
-        CCScale9Sprite* bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-        bg->setPosition(ccp(110, yPos + 10));
-        bg->setScale(0.355f);
-        bg->setColor({ 0,0,0 });
-        bg->setOpacity(75);
-        bg->setAnchorPoint({ 0, 1 });
-        bg->setContentSize({ 100, 55 });
-        bg->setZOrder(29);
+        auto* bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+        bgSpr->setPosition(ccp(110, yPos + 10));
+        bgSpr->setScale(0.355f);
+        bgSpr->setColor({ 0,0,0 });
+        bgSpr->setOpacity(75);
+        bgSpr->setAnchorPoint({ 0, 1 });
+        bgSpr->setContentSize({ 100, 55 });
+        bgSpr->setZOrder(29);
         nodes.push_back(static_cast<CCNode*>(bg));
-        menu->addChild(bg);
+        menu->addChild(bgSpr);
 
         respawnInput = CCTextInputNode::create(150, 30, "sec", "chatFont.fnt");
         respawnInput->setPosition(ccp(127.5, yPos));

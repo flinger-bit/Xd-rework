@@ -106,14 +106,14 @@ bool RenderSettingsLayer::init(float w, float h, const char* bg, cocos2d::CCRect
     m_mainLayer->addChild(menu);
     menu->setPositionX(menu->getPositionX() - 67);
 
-    CCScale9Sprite* bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setScale(0.355f);
-    bg->setColor({ 0,0,0 });
-    bg->setOpacity(75);
-    bg->setPosition(ccp(-28, 97));
-    bg->setAnchorPoint({ 0, 1 });
-    bg->setContentSize({ 392, 55 });
-    menu->addChild(bg);
+    auto* bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    bgSpr->setScale(0.355f);
+    bgSpr->setColor({ 0,0,0 });
+    bgSpr->setOpacity(75);
+    bgSpr->setPosition(ccp(-28, 97));
+    bgSpr->setAnchorPoint({ 0, 1 });
+    bgSpr->setContentSize({ 392, 55 });
+    menu->addChild(bgSpr);
 
     if (usingApi) bg->setOpacity(40);
 
@@ -142,14 +142,14 @@ bool RenderSettingsLayer::init(float w, float h, const char* bg, cocos2d::CCRect
     argsInput->setAllowedChars(" 0123456789abcdefghijklmnopqrstuvwxyz-_:;.\"\\/[](){}+=<>|!*&'%@");
     menu->addChild(argsInput);
 
-    bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setScale(0.355f);
-    bg->setColor({ 0,0,0 });
-    bg->setOpacity(75);
-    bg->setPosition(ccp(-31, 65));
-    bg->setAnchorPoint({ 0, 1 });
-    bg->setContentSize({ 401, 55 });
-    menu->addChild(bg);
+    bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    bgSpr->setScale(0.355f);
+    bgSpr->setColor({ 0,0,0 });
+    bgSpr->setOpacity(75);
+    bgSpr->setPosition(ccp(-31, 65));
+    bgSpr->setAnchorPoint({ 0, 1 });
+    bgSpr->setContentSize({ 401, 55 });
+    menu->addChild(bgSpr);
     
     if (usingApi) bg->setOpacity(40);
 
@@ -178,23 +178,23 @@ bool RenderSettingsLayer::init(float w, float h, const char* bg, cocos2d::CCRect
     audioArgsInput->setAllowedChars(" 0123456789abcdefghijklmnopqrstuvwxyz-_:;.\"\\/[](){}+=<>|!*&'%@");
     menu->addChild(audioArgsInput);
 
-    bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setScale(0.375f);
-    bg->setColor({ 0,0,0 });
-    bg->setOpacity(75);
-    bg->setPosition(ccp(49, 4));
-    bg->setAnchorPoint({ 0, 1 });
-    bg->setContentSize({ 82, 55 });
-    menu->addChild(bg);
+    bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    bgSpr->setScale(0.375f);
+    bgSpr->setColor({ 0,0,0 });
+    bgSpr->setOpacity(75);
+    bgSpr->setPosition(ccp(49, 4));
+    bgSpr->setAnchorPoint({ 0, 1 });
+    bgSpr->setContentSize({ 82, 55 });
+    menu->addChild(bgSpr);
 
-    bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setScale(0.355f);
-    bg->setColor({ 0,0,0 });
-    bg->setOpacity(75);
-    bg->setPosition({-29, 34});
-    bg->setAnchorPoint({ 0, 1 });
-    bg->setContentSize({ 395, 55 });
-    menu->addChild(bg);
+    bgSpr = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    bgSpr->setScale(0.355f);
+    bgSpr->setColor({ 0,0,0 });
+    bgSpr->setOpacity(75);
+    bgSpr->setPosition({-29, 34});
+    bgSpr->setAnchorPoint({ 0, 1 });
+    bgSpr->setContentSize({ 395, 55 });
+    menu->addChild(bgSpr);
 
     videoArgsInput = CCTextInputNode::create(150, 30, "video args", "chatFont.fnt");
     videoArgsInput->m_textField->setAnchorPoint({ 0.5f, 0.5f });

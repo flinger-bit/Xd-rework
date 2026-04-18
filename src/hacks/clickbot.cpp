@@ -153,7 +153,7 @@ class $modify(GJBaseGameLayer) {
         std::string btn = button == 1 ? "click" : (button == 2 ? "left" : "right");
         std::string soundId = (hold ? "hold_" : "release_") + btn;
 
-        bool isDual = pl->m_isDualMode;
+        bool isDual = pl->m_levelSettings->m_twoPlayerMode;
         Clickbot::playSound(soundId, player2, isDual);
     }
 
