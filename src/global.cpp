@@ -160,9 +160,7 @@ float Global::getTPS() {
 int Global::getCurrentFrame(bool editor) {
   PlayLayer* pl = PlayLayer::get();
 
-  if (!pl) {
-    if (!editor) return 0;
-  }
+  if (!pl) return 0;
 
   auto& g = Global::get();
   int frame;
@@ -185,6 +183,7 @@ void Global::updateKeybinds() {
 #ifdef GEODE_IS_WINDOWS
 
   auto& g = Global::get();
+  g.allKeybinds.clear();
   for (size_t i = 0; i < 6; i++) {
     auto keys = keybinds::BindManager::get()->getBindsFor(buttonIDs[i]);
     std::vector<int> keysInts = {};
@@ -209,7 +208,12 @@ void Global::updateSeed(bool isRestart) {
     PlayLayer* pl = PlayLayer::get();
     if (!pl) return;
 
-    unsigned long long ull = std::stoull(g.mod->getSavedValue<std::string>("macro_seed"), nullptr, 0);
+    unsigned long long ull = 1;
+    try {
+        ull = std::stoull(g.mod->getSavedValue<std::string>("macro_seed"), nullptr, 0);
+    } catch (...) {
+        log::warn("updateSeed: invalid macro_seed value, using 1");
+    }
     uintptr_t seed = static_cast<uintptr_t>(ull);
     int finalSeed;
 
@@ -252,6 +256,7 @@ void Global::updatePitch(float value) {
   }
 
   FMODAudioEngine* fmod = FMODAudioEngine::sharedEngine();
+  if (!fmod || !fmod->m_system) return;
   FMOD::ChannelGroup* channel = nullptr;
   fmod->m_system->getMasterChannelGroup(&channel);
 

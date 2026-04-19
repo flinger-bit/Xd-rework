@@ -45,15 +45,28 @@ bool Macro::flipControls() {
     return pl->m_levelSettings->m_platformerMode ? false : GameManager::get()->getGameVariable("0010");
 }
 
+static std::string sanitizeName(std::string name) {
+    static const std::string invalid = "/\\:*?\"<>|";
+    for (char& c : name)
+        if (invalid.find(c) != std::string::npos) c = '_';
+    return name;
+}
+
 void Macro::autoSave(GJGameLevel* level, int number) {
     if (!level) level = PlayLayer::get() != nullptr ? PlayLayer::get()->m_level : nullptr;
     if (!level) return;
 
-    std::string levelname = level->m_levelName;
+    std::string levelname = sanitizeName(level->m_levelName);
     std::filesystem::path autoSavesPath = Mod::get()->getSettingValue<std::filesystem::path>("autosaves_folder");
-    std::filesystem::path path = autoSavesPath / fmt::format("autosave_{}_{}", levelname, number);
 
-    if (!std::filesystem::exists(autoSavesPath)) return;
+    std::error_code ec;
+    std::filesystem::create_directories(autoSavesPath, ec);
+    if (ec) {
+        log::warn("autoSave: could not create folder {}: {}", autoSavesPath.string(), ec.message());
+        return;
+    }
+
+    std::filesystem::path path = autoSavesPath / fmt::format("autosave_{}_{}", levelname, number);
 
     std::string username = GJAccountManager::sharedState() != nullptr ? GJAccountManager::sharedState()->m_username : "";
     int result = Macro::save(username, fmt::format("AutoSave {} in level {}", number, levelname), path.string());
@@ -72,10 +85,13 @@ void Macro::tryAutosave(GJGameLevel* level, CheckpointObject* cp) {
 
     std::filesystem::path autoSavesPath = g.mod->getSettingValue<std::filesystem::path>("autosaves_folder");
 
-    if (!std::filesystem::exists(autoSavesPath))
-        return log::debug("Failed to access auto saves path.");
+    {
+        std::error_code ec;
+        std::filesystem::create_directories(autoSavesPath, ec);
+        if (ec) return log::debug("tryAutosave: cannot create autosaves folder: {}", ec.message());
+    }
 
-    std::string levelname = level->m_levelName;
+    std::string levelname = sanitizeName(level->m_levelName);
     std::filesystem::path path = autoSavesPath / fmt::format("autosave_{}_{}", levelname, g.currentSession);
     std::error_code ec;
     std::filesystem::remove(path.string() + ".gdr", ec); // Remove previous save
@@ -102,7 +118,8 @@ void Macro::updateInfo(PlayLayer* pl) {
     if (name != g.macro.levelInfo.name)
         g.macro.levelInfo.name = name;
 
-    std::string author = GJAccountManager::sharedState()->m_username;
+    std::string author = (GJAccountManager::sharedState() != nullptr)
+        ? GJAccountManager::sharedState()->m_username : "";
     if (g.macro.author != author)
         g.macro.author = author;
 
@@ -165,7 +182,9 @@ int Macro::save(std::string author, std::string desc, std::string path, bool jso
 
     g.macro.author = author;
     g.macro.description = desc;
-    g.macro.duration = g.macro.inputs.back().frame / g.macro.framerate;
+    g.macro.duration = (g.macro.framerate > 0.f)
+        ? g.macro.inputs.back().frame / g.macro.framerate
+        : 0.f;
 
     {
         std::error_code ec;

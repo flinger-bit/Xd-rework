@@ -104,14 +104,19 @@ class $modify(GJBaseGameLayer) {
         
         int frame = Global::getCurrentFrame();
 
-        if (g.renderer.recording && frame % static_cast<int>(Global::getTPS() / g.renderer.fps) == 0)
+        int tpsPerFrame = (g.renderer.fps > 0.f)
+            ? static_cast<int>(Global::getTPS() / g.renderer.fps)
+            : 1;
+        if (tpsPerFrame < 1) tpsPerFrame = 1;
+
+        if (g.renderer.recording && frame % tpsPerFrame == 0)
             return g.renderer.handleRecording(pl, frame);
 
         if (g.renderer.recordingAudio && !g.renderer.startedAudio) {
             return g.renderer.startAudio(pl);
         }
 
-        if (g.renderer.recordingAudio && frame % static_cast<int>(Global::getTPS() / g.renderer.fps) == 0)
+        if (g.renderer.recordingAudio && frame % tpsPerFrame == 0)
             return g.renderer.handleAudioRecording(pl, frame);
     }
 };

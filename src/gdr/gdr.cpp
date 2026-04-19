@@ -5,17 +5,20 @@
 cocos2d::CCPoint dataFromString(std::string dataString) {
     std::stringstream ss(dataString);
     std::string item;
-    std::vector<std::string> vec;
 
     float xPos = 0.f;
     float yPos = 0.f;
 
     for (int i = 0; i < 3; i++) {
-        std::getline(ss, item, ',');
-        if (i == 1)
-            xPos = std::stof(item);
-        else if (i == 2)
-            yPos = std::stof(item);
+        if (!std::getline(ss, item, ',')) break;
+        try {
+            if (!item.empty()) {
+                if (i == 1) xPos = std::stof(item);
+                else if (i == 2) yPos = std::stof(item);
+            }
+        } catch (...) {
+            log::warn("dataFromString: failed to parse field {}: '{}'", i, item);
+        }
     }
 
     return { xPos, yPos };
@@ -38,11 +41,19 @@ std::vector<std::string> splitByChar(std::string str, char splitChar) {
 }
 
 geode::prelude::VersionInfo getVersion(std::vector<std::string> nums) {
-    size_t major = geode::utils::numFromString<int>(nums[0]).unwrapOr(-1);
-    size_t minor = geode::utils::numFromString<int>(nums[1]).unwrapOr(-1);
-    size_t patch = geode::utils::numFromString<int>(nums[2]).unwrapOr(-1);
-    
-    geode::prelude::VersionInfo ret(major, minor, patch);
+    if (nums.size() < 3) return geode::prelude::VersionInfo(0, 0, 0);
 
-    return ret;
+    int major = geode::utils::numFromString<int>(nums[0]).unwrapOr(0);
+    int minor = geode::utils::numFromString<int>(nums[1]).unwrapOr(0);
+    int patch = geode::utils::numFromString<int>(nums[2]).unwrapOr(0);
+
+    if (major < 0) major = 0;
+    if (minor < 0) minor = 0;
+    if (patch < 0) patch = 0;
+
+    return geode::prelude::VersionInfo(
+        static_cast<size_t>(major),
+        static_cast<size_t>(minor),
+        static_cast<size_t>(patch)
+    );
 }

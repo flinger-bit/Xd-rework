@@ -13,8 +13,7 @@
   "dependencies": {
     "geode.custom-keybinds": {
       "version": ">=v2.0.0",
-      "importance": "required",
-      "platforms": ["win"]
+      "importance": "suggested"
     }
   },
   "settings": {
