@@ -17,7 +17,7 @@ cocos2d::CCPoint dataFromString(std::string dataString) {
                 else if (i == 2) yPos = std::stof(item);
             }
         } catch (...) {
-            log::warn("dataFromString: failed to parse field {}: '{}'", i, item);
+            geode::log::warn("dataFromString: failed to parse field {}: '{}'", i, item);
         }
     }
 
