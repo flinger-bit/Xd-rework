@@ -46,10 +46,13 @@ std::string Utils::narrow(const wchar_t* str) {
 std::wstring Utils::widen(const char* str) {
 #ifdef GEODE_IS_ANDROID
 
-    std::wstring result;
-    result.reserve(strlen(str));
+    if (!str) return L"";
 
-    for (size_t i = 0; i < strlen(str); ++i) {
+    std::wstring result;
+    size_t len = strlen(str);
+    result.reserve(len);
+
+    for (size_t i = 0; i < len; ++i) {
         result.push_back(static_cast<wchar_t>(str[i]));
     }
 
@@ -118,7 +121,7 @@ std::time_t Utils::getFileCreationTime(const std::filesystem::path& path) {
 
     return ull.QuadPart / 10000000ULL - 11644473600ULL;
 #endif
-    std::time_t ret;
+    std::time_t ret = 0;
     return ret;
 }
 
@@ -169,16 +172,15 @@ std::string Utils::getTexture() {
 }
 
 std::string Utils::getSimplifiedString(std::string str) {
+    if (str.empty()) return "0";
     if (str.find(".") == std::string::npos) return str;
 
-    while(str.back() == '0') {
+    while (!str.empty() && str.back() == '0')
         str.pop_back();
-        if (str.empty()) break;
-    }
 
-    if (!str.empty())
-        if (str.back() == '.') str.pop_back();
+    if (!str.empty() && str.back() == '.')
+        str.pop_back();
 
-    return str;
+    return str.empty() ? "0" : str;
 }
 

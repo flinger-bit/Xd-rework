@@ -42,7 +42,7 @@ class $modify(PlayLayer) {
         PlayLayer::postUpdate(dt);
         auto& g = Global::get();
 
-        if (m_fields->delayedLevelRestart != -1 && m_fields->delayedLevelRestart >= Global::getCurrentFrame()) {
+        if (m_fields->delayedLevelRestart != -1 && Global::getCurrentFrame() >= m_fields->delayedLevelRestart) {
             m_fields->delayedLevelRestart = -1;
             resetLevelFromStart();
         }

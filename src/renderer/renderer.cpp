@@ -819,9 +819,12 @@ void Renderer::stopAudio() {
 
 void Renderer::handleAudioRecording(PlayLayer* pl, int frame) {
     auto& g = Global::get();
-    
+    auto fmod = FMODAudioEngine::sharedEngine();
+
+    if (fmod) {
         fmod->m_globalChannel->setVolume(SFXVolume);
         fmod->m_backgroundMusicChannel->setVolume(musicVolume);
+    }
 
     if (!pl) {
         g.renderer.stopAudio();

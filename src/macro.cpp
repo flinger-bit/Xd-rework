@@ -167,6 +167,12 @@ int Macro::save(std::string author, std::string desc, std::string path, bool jso
     g.macro.description = desc;
     g.macro.duration = g.macro.inputs.back().frame / g.macro.framerate;
 
+    {
+        std::error_code ec;
+        std::filesystem::create_directories(std::filesystem::path(path).parent_path(), ec);
+        if (ec) log::warn("create_directories failed: {}", ec.message());
+    }
+
     std::ofstream f;
     #ifdef GEODE_IS_WINDOWS
     std::wstring widePath = Utils::widen(path);
@@ -241,12 +247,16 @@ Macro Macro::XDtoGDR(std::filesystem::path path) {
         while (std::getline(ss, item, '|'))
             action.push_back(item);
 
+        if (action.empty()) continue;
+
         if (action.size() < 4) {
             if (action[0] == "android")
                 fpsMultiplier = 4.f;
             else {
-                int fps = std::stoi(action[0]);
-                fpsMultiplier = 240.f / fps;
+                try {
+                    int fps = std::stoi(action[0]);
+                    if (fps > 0) fpsMultiplier = 240.f / fps;
+                } catch (...) {}
             }
 
             continue;
@@ -256,11 +266,21 @@ Macro Macro::XDtoGDR(std::filesystem::path path) {
         int button = std::stoi(action[2]);
         bool hold = action[1] == "1";
         bool player2 = action[3] == "1";
+
+        if (action.size() < 5) {
+            newMacro.inputs.push_back(input(frame, button, player2, hold));
+            continue;
+        }
+
         bool posOnly = action[4] == "1";
 
         if (!posOnly)
             newMacro.inputs.push_back(input(frame, button, player2, hold));
         else {
+            if (action.size() < 13) {
+                log::warn("XDtoGDR: posOnly line has only {} fields, skipping", action.size());
+                continue;
+            }
             cocos2d::CCPoint p1Pos = ccp(std::stof(action[5]), std::stof(action[6]));
             cocos2d::CCPoint p2Pos = ccp(std::stof(action[11]), std::stof(action[12]));
 
